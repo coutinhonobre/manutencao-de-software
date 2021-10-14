@@ -1,0 +1,53 @@
+
+
+O que está faltando ?
+
+1 - Controle de estoque eficiente ?
+
+       		Por Exemplo	
+	
+	Produto : 100 - Farinha de Trigo			     
+	---------------------
+	Local	      Estoque		
+	---------------------
+	Loja		50
+	Deposito 1	100
+	Deposito 2	200
+	Deposito 3	300
+	---------------------
+	Total...........650	
+	---------------------
+
+	* Refazer módulo de Compra direcionada para o local de estocagem
+	* Contruir módulo de transferencia de estoque
+
+2 - Fechamento automático do mes, com possibilidade de consulta dos meses 
+    passados:
+	
+	Obs: o fechamento é necessário pois temos em dois meses aproximada-
+	mente 88.000 registros no arquivo de itens de movimento e 44.000 
+	registros no arquivo de movimento.
+
+3 - Construir um controle bancario.
+
+4 - Controle de Contas Recebidas (Só controla as contas a receber).
+
+5 - Controle de Contas a Pagar (não especifica o tipo de documento usado)
+	
+	Se cheque emitido cadastrar o seu numero, vencimento, conta para ser 
+   usado na previsão de grana a sair da conta bancária.
+
+	Objetivo: integrar o *(controle bancario)* as contas a pagar.
+	
+
+6 - Construir o fluxo de caixa.
+
+7 - Verificar como é feito o calculo do preco médio.
+
+    
+
+					
+		
+
+
+	

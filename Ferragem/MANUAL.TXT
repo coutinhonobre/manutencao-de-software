@@ -1,0 +1,146 @@
+
+
+                               S.F.C. 
+                              ==========
+
+       Sistema Financeiro Comercial - Vers„o 2.7.
+
+                        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                        ³ Apresenta‡„o do sistema ³İ
+                        ÀÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜİ
+       
+             ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+             Ã  Objetivo do sistema: ´
+             ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+        O SISTEMA FINANCEIRO COMERCIAL tem como objetivo principal o
+tratamento confi vel das informa‡”es relacionadas …s vendas e compras
+de produtos, permitindo o controle total de estoque, vendas, compras,
+contas a Pagar, contas a Receber.
+
+             ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+             Ã  Ambiente: ´
+             ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+        O SFC foi projetado para roda em um ambiente de microcomputador
+compat¡vel com o modelo IBM PC, utilizado um ou varios computadores 486
+ou superior e com 8 MegaByte de mem¢ria.
+        O SFC roda em :
+        - Sistema Operacional Monousu rio DOS ,
+        - Em Rede usando a plataforma Windows versao 3.11. ou 95 ,
+        - Rede Lantastic ,
+        - Rede Novel.
+        O SFC foi projetado em linguagem de programa‡ao CLIPPER 5.2.
+
+        SFC e seus M¢dulos:
+
+       ÚÄÄÄÄÄÄÄÄÄÄÄ¿
+       Ã  Vendas ³
+       ÀÄÄÄÄÄÂÄÄÄÄÄÙ
+             ³
+             ÃÄÄÄ Lan‡amento
+             ÃÄÄÄ Cancelamento
+             ÀÄÄÄ Monitoramento  ÄÄÂÄ
+                                    ÃÄ Per¡odo
+                                    ÃÄ Documento
+                                    ÃÄ Produto
+                                    ÀÄ Grupo
+
+
+       1 - Lan‡amento : M¢dulo Respons vel pela coleta de inform‡ao sobre
+                        as vendas (A vista ou a Prazo).Tendo como Caracte-
+                        r¡stica principal a baixa de estoque autom tica
+                        dos produtos
+
+       ÚÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+       Ã  Cadastro ´
+       ÀÄÄÄÄÄÂÄÄÄÄÄÄÄÙ
+             ³
+             ÃÄÄÄ Produtos
+             ÃÄÄÄ Grupos
+             ÃÄÄÄ Cargos
+             ÃÄÄÄ Funcion rios
+             ÃÄÄÄ Clientes
+             ÃÄÄÄ Fornecedores
+             ÀÄÄÄ Opera‡”es
+
+       ÚÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+       Ã  Compra   ´
+       ÀÄÄÄÄÄÂÄÄÄÄÄÄÄÙ
+             ³
+             ÃÄÄÄ Lan‡amento
+             ÃÄÄÄ Cancelamento
+             ÀÄÄÄ Monitoramento  ÄÄÂÄ
+                                    ÃÄ Per¡odo
+                                    ÃÄ Documento
+                                    ÃÄ Fornecedor
+                                    ÀÄ Produto
+
+       ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+       Ã Relat¢rios ´
+       ÀÄÄÄÄÄÂÄÄÄÄÄÄÄÄÙ
+             ³
+             ÃÄÄÄ Financeiro  
+             ÃÄÄÄ Cadastro    
+             ÃÄÄÄ Estoque     
+             ÀÄÄÄ Estatistica 
+
+       ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+       Ã Relat¢rios Financeiro ³
+       ÀÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+             ³
+             ÃÄÄÄ Fechamento do Caixa
+             ÃÄÄÄ Tabela Gerencial       
+             ÃÄÄÄ Valoriza‡ao do Estoque 
+             ÃÄÄÄ Contas a Receber
+             ÀÄÄÄ Contas a Pagar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+com m¢dulos de  relat¢rios que poder„o informar estat¡sticas de vendas
+por Funcion rio ,por vendas por grupo e por vendas por produto, podendo ainda
+informar posi‡„o de estoque atual, estoque m¡nimo, fechamento de caixa, Contas
+a Pagar com Status de Atrasado ou em dia , listagem de pre‡o e relat¢rio de
+ganhos por funcion rio.
+
+
+
+              ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+                Utilit rio: 
+              ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+        Uma calculadora poder  ser acionada a qualquer momento,  pressionando
+a tecla <F10>.
+
+        Pressionando a Tecla <F1> no comando de Leitura ser  apresentado uma
+ajuda para o usu rio.
+
+
+
+                      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                      ³ TeraByte - Inform tica.³
+                      ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+

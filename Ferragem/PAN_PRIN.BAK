@@ -1,0 +1,167 @@
+# include "INKEY.ch"
+# include "Getpass.ch"
+# include "BOX.CH"
+# include "PAN.CH"
+
+public NRotina
+public NUsuario
+public SKDADO:={}
+public Nova_Data := Date()
+use cor alias _cor new
+dbgotop()
+public cor_Fundo  := Frente + "/" + Fundo
+dbskip()
+public cor_Titulo := Frente + "/" + Fundo
+dbskip()
+public cor_Apresentacao := Frente + "/" + Fundo
+dbskip()
+MyCor1 := Frente + "/" + Fundo
+dbskip()
+MyCor2 := Frente + "/" + Fundo
+public MYCOLORS := MyCor1 + "," + MyCor2
+close _cor
+telpadrao()
+FUNDO()
+/*if Date() >= Ctod("10/02/2000")
+   Alert("Data de Validade Expirada..!!")
+   cls
+   return nil
+endif */
+@ 00,23 say "³" + space(37) + "³" color ["&cor_Fundo"]
+@ 01,23 say "³" + space(37) + "³" color ["&cor_Fundo"]
+@ 02,23 say "³" + space(37) + "³" color ["&cor_Fundo"]
+@ 00,25 say "      ÉÍ» ÉÍ» ËÍ» ÉÍ ÉÍ ÉÍ ÉÍ»      "    color ["&cor_Apresentacao"]
+@ 01,25 say "      º   º º º º ÌÍ ÌÍ ÌÍ ºË¼      "    color ["&cor_Apresentacao"]
+@ 02,25 say "      ÈÍ¼ ÈÍ¼ Ğ Ğ ÊÍ Ğ  ÊÍ ĞÓ       "    color ["&cor_Apresentacao"]
+//@ 00,25 say "  ÉÍËÍ» ÉÍ ËÍ» ËÍ» ÉÍ» ËÍ» ÉÍ» ÉÍ»  "    color ["&cor_Apresentacao"]
+//@ 01,25 say "  º º º ÌÍ º º º º º º º º º   ÌÍ¹  "    color ["&cor_Apresentacao"]
+//@ 02,25 say "  Ğ Ğ Ğ ÊÍ Ğ Ğ ÊÍ¼ ÈÍ¼ Ğ Ğ ÈË¼ Ğ Ğ  "    color ["&cor_Apresentacao"]
+//@ 00,25 say "  ÉÍ Ë   ÉÍ ÉË» ÉÍ» ÉÍ» ÉÍ ÉÍ ÉÍ»   "    color ["&cor_Apresentacao"]
+//@ 01,25 say "  ÌÍ º   ÌÍ  º  ºË¼ º º ÌÍ ÌÍ ºË¼   "    color ["&cor_Apresentacao"]
+//@ 02,25 say "  ÊÍ ÈÍ¼ ÊÍ  Ğ  ĞÓ  ÈÍ¼ Ğ  ÊÍ ĞÓ    "    color ["&cor_Apresentacao"]
+@ 03,23 say "ÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁ" color ["&cor_Fundo"]
+Tela_Entrada:= Savescreen(00,00,maxrow(),maxcol())
+Cor_Antiga := SetColor()
+SetColor("W/BG+")
+@ 10,22 clear to 14,61
+@ 10,22 to 14,61
+sombra( 10, 22, 14, 61)
+do while .T.
+   SetColor("W/BG+")
+   @ 11,23 say space(35)
+   @ 11,23 say "An polis," + alltrim(Str(Day(Nova_Data))) + " de " + conv_mes(Nova_Data) + " de " + alltrim(str(year(Nova_Data)))
+   @ 13,23 say "Data de Entrada do Sistema:" get Nova_Data pict "99/99/99" valid(Nova_Data >= Ctod("01/01/98"))
+   read
+   if Nova_Data < date()
+      SetColor("W/B+")
+      @ 17,15 clear to 20,70
+      @ 17,15 to 20,70
+      sombra( 17, 15, 20, 70)
+      @ 18,17 say "Voce ter  acesso aos dados do Mes " + conv_mes(Nova_Data)+"/"+alltrim(str(year(Nova_Data)))
+      @ 19,17 say "Pressione Qualquer Tecla Para Continuar..!"
+      inkey(0)
+      exit
+   elseif Nova_Data > date()
+      Tela_Mensagem := Savescreen(00,00,maxrow(),maxcol())
+      SetColor("W/B+")
+      @ 17,15 clear to 20,67
+      @ 17,15 to 20,67
+      sombra( 17, 15, 20, 67)
+      @ 18,17 say "Usu rio, verifique a digita‡„o do campo data..."
+      @ 19,17 say "Pressione Qualquer Tecla Para Continuar..!"
+      inkey(0)
+      SetColor("&Cor_Antiga")
+      Restscreen(00,00,maxrow(),maxcol(),Tela_Mensagem)
+      loop
+   elseif Nova_Data = date()
+      exit
+   endif
+   Nova_Data := Date()
+enddo
+SetColor("&Cor_Antiga")
+Restscreen(00,00,maxrow(),maxcol(),Tela_Entrada)
+Nome_Arq := alltrim("Mov" + alltrim(str(Month(Nova_Data))) + right(alltrim(str(year(Nova_Data))),2))
+if !file(Nome_Arq+".DBF")
+    use Moviment new
+    copy structure to &Nome_Arq
+    close DataBases
+endif
+Nome_Arq := alltrim("Itm" + alltrim(str(Month(Nova_Data))) + right(alltrim(str(year(Nova_Data))),2))
+if !file(Nome_Arq+".DBF")
+    use ItensMov new
+    copy structure to &Nome_Arq
+    close DataBases
+endif
+Tela_Senha := Savescreen(00,00,maxrow(),maxcol())
+moldura(06,20,11,52,.f.," Senha ")
+NCont := 1
+Senha_Correta := .F.
+IF ! FILE("SUSE.NTX")
+   select 1
+   IF NET_USE("SENHA",.F.,10,"_SENHA",.F.,.F.)
+      index on User to SUSE
+      set index to SUSE
+   else
+     NUM_ERRO:=VALIDDBF("SENHA")
+     FATT:=GETFATTR("SENHA.DBF")
+     if ALERT("N„o foi poss¡vel abrir arquivo de Abertura.;Erro " +alltrim(str(NUM_ERRO)) + FATT +";Deseja continuar?",{"Sim","N„o"})==2
+        quit
+     endif
+   endif
+endif
+close all
+OPEN SENHA ALIAS "_SENHA" INDEX SUSE SHARED
+Set order to 1
+Dbgotop()
+Do while Senha_Correta = .F.
+   NUser  := space(20)
+   NSenha := space(10)
+   @ 08,22 Say "Usu rio:" Get NUser Valid (!empty(NUser)) pict "@!"
+   @ 10,22 Say "Senha..:" Get NSenha PASSWORD Valid (!empty(NSenha))
+   Read
+   if Dbseek(NUser)
+      Senha := Alltrim(Senha)
+      TSenha :=Chr(Asc(Substr(Senha,1,1))/2)
+      For I := 2 to Len(Alltrim(Senha))
+        TSenha := TSenha + Chr(Asc(Substr(Senha,I,1))/2)
+      Next
+      Senha_Correta:=.T.
+      if alltrim(NSenha) = alltrim(TSenha)
+         Senha_Correta := .T.
+         NRotina  := alltrim(Rotinas)
+         NUsuario := alltrim(NUser)
+         Restscreen(00,00,maxrow(),maxcol(),Tela_Senha)
+         exit
+      else
+        if NCont <> 3
+           Mensagem := "Senha Inv lida , Vocˆ Tem " + alltrim(str(3-NCont)) + " Chances"
+           Alerta(11,25,Mensagem)
+        endif
+      endif
+   else
+      Mensagem := "Usu rio Nao Est  Cadastrado , Vocˆ Tem " + alltrim(str(3-NCont)) + " Chances"
+      Alerta(11,25,Mensagem)
+   endif
+   if NCont = 3
+      Alerta(11,25,"Tentativas Esgotadas..!")
+      Senha_Correta := .F.
+      exit
+   endif
+   NCont++
+enddo
+Close _SENHA
+@ 01,69 say dtoc(Nova_Data)
+if Senha_Correta
+   INDEXA()
+   MAIN()
+else
+   setcolor("w/n")
+   cls
+   @ 10,25 say "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿"
+   @ 11,25 say "³      TeraByte Inform tica     ³"
+   @ 12,25 say "³  N„o Esque‡a de Fazer Backup  ³"
+   @ 12,25 say "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ"
+   inkey(0)
+   cls
+   quit
+endif

@@ -1,0 +1,16 @@
+1 - Grupos
+    Determinados nao tem comissao
+
+2 - Fechamento do Mes deve ser automatico
+
+3 - Baixa de pagtos==Receb. Clientes
+
+4 - Cancelamento de venda: Listar mercadorias
+
+5 - Relatorio Bonificacao
+     Cod + Nome Produto + Quantidade + Valor
+     Somatorio Valor
+
+6 - Verificar o Multius.
+
+

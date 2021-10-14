@@ -1,0 +1,26 @@
+
+// Eletrofer -> 324-0677
+@ 00,25 say "   им к   им ик╩ им╩ им╩ им им им╩    "    color ["&cor_Apresentacao"]
+@ 01,25 say "   лм ╨   лм  ╨  ╨к╪ ╨ ╨ лм лм ╨к╪    "    color ["&cor_Apresentacao"]
+@ 02,25 say "   йм хм╪ йм  п  пс  хм╪ п  йм пс     "    color ["&cor_Apresentacao"]
+@ 03,23 say "аддддддддддддддддддддддддддддддддддддда" color ["&cor_Fundo"]
+
+@ 00,25 say "   ик╩ им им╩ им╩ им╩ к к ик╩ им    "    color ["&cor_Apresentacao"]
+@ 01,25 say "    ╨  лм ╨к╪ лм╧ ╨м╧ хк╪  ╨  лм    "    color ["&cor_Apresentacao"]
+@ 02,25 say "    п  йм пс  п п йм╪  п   п  йм    "    color ["&cor_Apresentacao"]
+@ 03,23 say "аддддддддддддддддддддддддддддддддддддда" color ["&cor_Fundo"]
+
+@ 00,25 say "    имкм╩ им╩ у╩и╦   им╩ им╩ им╩    "    color ["&cor_Apresentacao"]
+@ 01,25 say "    ╨ ╨ ╨ лм╧  л╧    лм╪ лм╧ ╨ ╨    "    color ["&cor_Apresentacao"]
+@ 02,25 say "    п п п п п т╪х╬   п   п п хм╪    "    color ["&cor_Apresentacao"]
+@ 03,23 say "адддддддддддддддддддддддддддддддддддддддда" color ["&cor_Fundo"]
+
+@ 00,25 say " им╩  им╩ им╩ им╩  км╩ им╩ им╩ им╩ им╩ "    color ["&cor_Apresentacao"]
+@ 01,25 say " ╨ ╨  лм╪ лм╧ ╨ ╨  ╨ ╨ ╨ ╨ хм╩ хм╩ ╨ ╨ "    color ["&cor_Apresentacao"]
+@ 02,25 say " хм╪  п   п п хм╪  п п хм╪ хм╪ хм╪ хм╪ "    color ["&cor_Apresentacao"]
+@ 03,23 say "адддддддддддддддддддддддддддддддддддддддда" color ["&cor_Fundo"]
+
+@ 00,25 say "  имкм╩ им км╩ км╩ им╩ км╩ им╩ им╩  "    color ["&cor_Apresentacao"]
+@ 01,25 say "  ╨ ╨ ╨ лм ╨ ╨ ╨ ╨ ╨ ╨ ╨ ╨ ╨   лм╧  "    color ["&cor_Apresentacao"]
+@ 02,25 say "  п п п йм п п йм╪ хм╪ п п хк╪ п п  "    color ["&cor_Apresentacao"]
+@ 03,23 say "аддддддддддддддддддддддддддддддддддддда" color ["&cor_Fundo"]
