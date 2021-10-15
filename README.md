@@ -23,6 +23,11 @@
     <li><code>D</code></li>
 </ul>
 
+<h3>Fazer build do projeto <b>rmake PAO.RMK</b></h3>
+<ul>
+    <li><code>rmake PAO.RMK</code></li>
+</ul>
+
 <h3>Editar Arquivos <b>Q.EXE</b></h3>
 <ul>
     <li><code>Q.EXE</code></li>
