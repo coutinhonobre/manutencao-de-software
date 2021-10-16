@@ -5,7 +5,7 @@
 
 <h3>Montar disco no DOSBox</h3>
 <code>mount c ˜/Manutencao</code>
-<b>comando faz o link da sua pasta de arquivos para virtualização
+<b>comando faz o link da sua pasta de arquivos para virtualização. Obs <code>/Manutencao</code> é a pasta que está localizada dentro da pasta de usuário do seu <bold>Sistema Operacional</bold>
 <br/><br/>
 
 <h3>Acessar disco <b>C:</b></h3>
