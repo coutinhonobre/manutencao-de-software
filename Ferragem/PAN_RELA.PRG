@@ -12,10 +12,10 @@ local DATA_INI:=DATA_FIM:= DATE()
 local TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol()) , inicio , Fim
 set intens on
 set cursor on
-@ 23,12 say "Digite o c¢digo do cliente para a emissao do relat¢rio"
+@ 23,12 say "Digite o cï¿½digo do cliente para a emissao do relatï¿½rio"
 beep(2)
 moldura(7,43,11,74,.F.," Contas a Receber ")
-@ 08,45 say "C¢digo do Cliente :" get Cod_Cliente pict "999" valid Cod_Cliente>0
+@ 08,45 say "Cï¿½digo do Cliente :" get Cod_Cliente pict "999" valid Cod_Cliente>0
 @ 09,45 say "     Data Inicial :"  get DATA_INI  pict "99/99/99" valid (!EMPTY(dtoc(DATA_INI)))
 @ 10,45 say "     Data Final ..:"  get DATA_FIM  pict "99/99/99" valid (!EMPTY(dtoc(DATA_FIM)))
 read
@@ -26,7 +26,7 @@ set intens off
 set cursor off
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio Extratificado Por Cliente" color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio Extratificado Por Cliente" color ["W+*"]
 Imp_OK := Imp_Doc()
 P := 1
 OPEN PRODUTOS ALIAS "_PRODUTOS" INDEX CO1_PROD,NO1_PROD,CO1_GRUP,Prod_GRUP SHARED
@@ -60,7 +60,7 @@ if Imp_OK
      Total_Documento:=0
      @ L,00 say alltrim(str(REC_COD))
      @ L,08 say DTOC(REC_DT)
-     // Pesquisar C¢digo em Itens de Recebimento
+     // Pesquisar Cï¿½digo em Itens de Recebimento
      select _ITENSREC
      set order to 1
      dbseek(str(_RECEB->REC_COD)+Dtos(_RECEB->REC_DT))
@@ -130,11 +130,11 @@ if Imp_OK
         L++
         @ L,40 say "       TOTAL GERAL: " + str(Soma_Desconto,9,2)
         L++
-        @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+        @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
         eject
      else
         L := 59
-        @ L,00 say repl("-",28) + " TeraByte Inform tica " + repl("-",29)
+        @ L,00 say repl("-",28) + " TeraByte Informï¿½tica " + repl("-",29)
         eject
         P++
         L := 0
@@ -147,14 +147,14 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V" .and. Tam_Rel > 0
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
    texto := memoread("Tela.Prn")
    memoedit(Texto,04,02,20,78,.F.)
 elseif Tam_Rel = 0
-   alert("N„o Existe Pagt. de Cliente em Atraso;Pressione algo para continuar!")
+   alert("Nï¿½o Existe Pagt. de Cliente em Atraso;Pressione algo para continuar!")
 endif
 set cursor on
 restscreen(0,0,maxrow(),maxcol(),TELA_RELATORIO)
@@ -175,7 +175,7 @@ set intens off
 set cursor off
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Contas a Receber de Todso os Cliente" color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Contas a Receber de Todso os Cliente" color ["W+*"]
 Imp_OK := Imp_Doc()
 P := 1
 OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
@@ -202,7 +202,7 @@ if Imp_OK
  enddo
  For I:= 1 to len(AVCOD)
   if L==0
-     Novo_Cab("Relat¢rio de Contas a Receber",{"C¢digo","Nome do Cliente","Total do Doc."},{01,12,60})
+     Novo_Cab("Relatï¿½rio de Contas a Receber",{"Cï¿½digo","Nome do Cliente","Total do Doc."},{01,12,60})
      L+=6
   endif
   if AVALOR[I] > 0
@@ -220,11 +220,11 @@ if Imp_OK
         @ L,51 say "Total :"
         @ L,61 say Soma_Total pict "999,999.99"
         L++
-        @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+        @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
         eject
      else
         L := 59
-        @ L,00 say repl("-",28) + " TeraByte Inform tica " + repl("-",29)
+        @ L,00 say repl("-",28) + " TeraByte Informï¿½tica " + repl("-",29)
         eject
         P++
         L := 0
@@ -237,7 +237,7 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -258,10 +258,10 @@ local Tam_Rel := 0
 local TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol()) , inicio , Fim
 set intens on
 set cursor on
-@ 23,12 say "Digite o c¢digo do cliente para a emissao do relat¢rio"
+@ 23,12 say "Digite o cï¿½digo do cliente para a emissao do relatï¿½rio"
 beep(2)
 moldura(7,43,9,71,.F.," Contas a Receber ")
-@ 08,45 say "C¢digo do Cliente :" get Cod_Cliente pict "99" valid Cod_Cliente>0
+@ 08,45 say "Cï¿½digo do Cliente :" get Cod_Cliente pict "99" valid Cod_Cliente>0
 read
 if lastkey() == K_ESC
    return nil
@@ -270,7 +270,7 @@ set intens off
 set cursor off
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Contas a Receber Por Cliente" color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Contas a Receber Por Cliente" color ["W+*"]
 Imp_OK := Imp_Doc()
 P := 1
 OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
@@ -291,7 +291,7 @@ enddo
 if Imp_OK
  do while ! eof()
   if L==0
-     Novo_Cab("Relat¢rio de Contas a Receber Por Cliente",{"N§ do Doc.","Nome do Cliente","Data da Compra","Total do Doc."},{01,12,43,60})
+     Novo_Cab("Relatï¿½rio de Contas a Receber Por Cliente",{"Nï¿½ do Doc.","Nome do Cliente","Data da Compra","Total do Doc."},{01,12,43,60})
      L+=6
   endif
   if Rec_Cli = Cod_Cliente
@@ -319,11 +319,11 @@ if Imp_OK
         @ L,51 say "Total :"
         @ L,61 say Soma_Total pict "999,999.99"
         L++
-        @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+        @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
         eject
      else
         L := 59
-        @ L,00 say repl("-",28) + " TeraByte Inform tica " + repl("-",29)
+        @ L,00 say repl("-",28) + " TeraByte Informï¿½tica " + repl("-",29)
         eject
         P++
         L := 0
@@ -336,14 +336,14 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V" .and. Tam_Rel > 0
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
    texto := memoread("Tela.Prn")
    memoedit(Texto,04,02,20,78,.F.)
 elseif Tam_Rel = 0
-   alert("N„o Existe Pagt. de Cliente em Atraso;Pressione algo para continuar!")
+   alert("Nï¿½o Existe Pagt. de Cliente em Atraso;Pressione algo para continuar!")
 endif
 set cursor on
 restscreen(0,0,maxrow(),maxcol(),TELA_RELATORIO)
@@ -360,18 +360,18 @@ private Cod_Cliente := 0
 OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
 set order to 1
 Dbgotop()
-@ 23,12 say "Digite a Informa‡ao Acima Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite a Informaï¿½ao Acima Para a Emissao do Relatï¿½rio"
 beep(2)
 apaga(.T.)
 set key K_F2 to Cli_Help()
-moldura(08,35,10,77,.F.," Relat¢rio Cliente Por C¢digo")
-@ 09,37 say "C¢d. Cliente:"  get Cod_Cliente pict "99" valid (Cod_Cliente>0 .and. ;
+moldura(08,35,10,77,.F.," Relatï¿½rio Cliente Por Cï¿½digo")
+@ 09,37 say "Cï¿½d. Cliente:"  get Cod_Cliente pict "99" valid (Cod_Cliente>0 .and. ;
   testa("_CLIENTES",Cod_Cliente,,09,54,"ClNome"))
 read
 set key K_F2 to
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio Cadastro de Cliente " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio Cadastro de Cliente " color ["W+*"]
 Imp_OK := Imp_Doc()
 if lastkey()==K_ESC
    Close Databases
@@ -388,7 +388,7 @@ L++
 L++
 @ L,00 say repl("-",76)
 L++
-@ L,07 say "C¢digo : [" + str(ClCod) + "]"
+@ L,07 say "Cï¿½digo : [" + str(ClCod) + "]"
 @ L,26 say "Nome : [" + alltrim(ClNome) + "]"
 L:=L+2
 @ L,05 say "Endereco : [ "  + alltrim(ClEnd) + " ]"
@@ -403,7 +403,7 @@ else
    @ L,40 say "Telefone : [ " + space(15) + " ]"
 endif
 L:=L+2
-@ L,05 say "N§ do RG : [ "  + alltrim(ClRG) + " ]"
+@ L,05 say "Nï¿½ do RG : [ "  + alltrim(ClRG) + " ]"
 @ L,45 say "CPF : [ " + alltrim(ClCPF) + " ]"
 L:=L+2
 @ L,00 say "Dt Nascimento : [ "  + transf(CLDTNASC,"99/99/99") + " ]"
@@ -418,14 +418,14 @@ L++
 L++
 @ L,00 say "Data Emissao Relatorio: "+dtoc(Date())
 L++
-@ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+@ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
 eject
 Fim := Time()
 set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -447,7 +447,7 @@ set order to Ind
 Dbgotop()
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio Cadastro de Cliente " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio Cadastro de Cliente " color ["W+*"]
 Imp_OK := Imp_Doc()
 if lastkey()==K_ESC
    Close Databases
@@ -457,7 +457,7 @@ endif
 P := 1
 do while ! eof()
   if L==0 .and. !eof()
-     Novo_Cab("Listagem de Clientes ",{"C¢digo","Nome do Cliente","Telefone"},{01,10,47})
+     Novo_Cab("Listagem de Clientes ",{"Cï¿½digo","Nome do Cliente","Telefone"},{01,10,47})
      L+=6
   endif
   @ L,01 say ClCod
@@ -480,7 +480,7 @@ do while ! eof()
      L++
      @ L,00 say "Total de Clientes Cadastrados : " + alltrim(str(CNumCliente))
      L++
-     @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+     @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
      eject
      P++
      L := 0
@@ -491,7 +491,7 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -513,7 +513,7 @@ set order to Ind
 Dbgotop()
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio Cadastro de Cliente " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio Cadastro de Cliente " color ["W+*"]
 Imp_OK := Imp_Doc()
 if lastkey()==K_ESC
    Close Databases
@@ -523,7 +523,7 @@ endif
 P := 1
 do while ! eof()
   if L==0 .and. !eof()
-     Novo_Cab("Listagem de Clientes ",{"C¢digo","Nome do Cliente","Telefone"},{01,10,47})
+     Novo_Cab("Listagem de Clientes ",{"Cï¿½digo","Nome do Cliente","Telefone"},{01,10,47})
      L+=6
   endif
   @ L,01 say ClCod
@@ -546,7 +546,7 @@ do while ! eof()
      L++
      @ L,00 say "Total de Clientes Cadastrados : " + alltrim(str(CNumCliente))
      L++
-     @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+     @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
      eject
      P++
      L := 0
@@ -557,7 +557,7 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -578,7 +578,7 @@ set order to Ind
 Dbgotop()
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio Cadastro Por Grupo " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio Cadastro Por Grupo " color ["W+*"]
 if lastkey()==K_ESC
    Close Databases
    set cursor on
@@ -589,7 +589,7 @@ Imp_OK := Imp_Doc()
 P := 1
 do while ! eof()
   if L==0 .and. !eof()
-     Novo_Cab("Listagem de Grupos ",{"C¢digo","Nome do Grupo","Pagt. de Comiss„o"},{01,10,48})
+     Novo_Cab("Listagem de Grupos ",{"Cï¿½digo","Nome do Grupo","Pagt. de Comissï¿½o"},{01,10,48})
      L+=6
   endif
   @ L,01 say GpCod
@@ -604,7 +604,7 @@ do while ! eof()
      else
         L++
      endif
-     @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+     @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
      eject
      P++
      L := 0
@@ -615,7 +615,7 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -634,18 +634,18 @@ local getlist:={} , L :=0 , TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 private Cod_Grupo := SQuantidade := 0
 OPEN GRUPOS  ALIAS "_GRUPOS" INDEX CO2_GRUP,NO2_GRUP SHARED
 Dbgotop()
-@ 23,12 say "Digite a Informa‡ao Acima Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite a Informaï¿½ao Acima Para a Emissao do Relatï¿½rio"
 beep(2)
 apaga(.T.)
 set key K_F2 to Gru_Help()
-moldura(08,35,10,77,.F.," Relat¢rio Estoque Por Grupo")
-@ 09,37 say "C¢d. Grupo :"  get Cod_Grupo pict "99" valid (Cod_Grupo>0 .and. ;
+moldura(08,35,10,77,.F.," Relatï¿½rio Estoque Por Grupo")
+@ 09,37 say "Cï¿½d. Grupo :"  get Cod_Grupo pict "99" valid (Cod_Grupo>0 .and. ;
   testa("_GRUPOS",Cod_Grupo,,09,53,"GpNome"))
 read
 set key K_F2 to
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio Produto Por Grupo " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio Produto Por Grupo " color ["W+*"]
 if lastkey()==K_ESC
    Close Databases
    set cursor on
@@ -660,7 +660,7 @@ dbgotop()
 dbseek(str(Cod_Grupo-1,2),.T.)
 do while ! eof()
   if L==0 .and. !eof()
-     Novo_Cab("Relat¢rio Produto/Grupo "+_GRUPOS->GpNome,{"C¢digo","Produto","Estoque Atual"},{01,10,53})
+     Novo_Cab("Relatï¿½rio Produto/Grupo "+_GRUPOS->GpNome,{"Cï¿½digo","Produto","Estoque Atual"},{01,10,53})
      L+=6
   endif
   if PrGrupo = Cod_Grupo
@@ -691,7 +691,7 @@ do while ! eof()
      L++
      @ L,35 say "Total Quantidade: " + transf(SQuantidade,"999999.99")
      L++
-     @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+     @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
      eject
      P++
      L := 0
@@ -702,7 +702,7 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -721,7 +721,7 @@ local getlist:={} , L , Soma , DATA_INI:=DATA_FIM:= DATE() , TELA_RELATORIO := s
 local inicio := fim := time() , HORA_INI:="06:00:00", HORA_FIM:=TIME()
 local Tot_Vista:=0, Tot_Prazo:=0,Tot_Bonific:=0,Tot_Consumo:=0
 apaga(.T.)
-@ 23,12 say "Digite as Informa‡oes Acima Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite as Informaï¿½oes Acima Para a Emissao do Relatï¿½rio"
 beep(2)
 moldura(05,43,10,71,.F.," Venda Por Documento ")
 @ 06,45 say "Data Inicial :"  get DATA_INI  pict "99/99/99" valid (!EMPTY(dtoc(DATA_INI)))
@@ -734,7 +734,7 @@ if lastkey() == K_ESC
 endif
 apaga(.F.)
 @ 23,10 say space(70)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Venda por Documento " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Venda por Documento " color ["W+*"]
 Imp_OK := Imp_Doc()
 OPEN OPERACOE ALIAS "_OPERACOE" INDEX CO4_OPER,NO4_OPER SHARED
 OPEN FUNCIONA ALIAS "_FUNCIONA" INDEX CO3_FUNC, NO3_FUNC, CargoFunc SHARED
@@ -760,7 +760,7 @@ P := 1
 if Imp_OK
    do while ! eof()
       if L==0
-         NCab(DATA_INI,DATA_FIM,"Venda Por Documento",{"N§.Doc.","Funcionario","Operacao","Data","Hora","Valor"},{00,08,23,39,48,59})
+         NCab(DATA_INI,DATA_FIM,"Venda Por Documento",{"Nï¿½.Doc.","Funcionario","Operacao","Data","Hora","Valor"},{00,08,23,39,48,59})
          L+=7
       endif
       if (MovDt>=DATA_INI) .and. (MovDt<=DATA_FIM) .and.;
@@ -809,7 +809,7 @@ if Imp_OK
          L++
          @ L,37 say "   Total Geral:" + str(Soma)
          L++
-         @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+         @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
          eject
          P++
          L := 0
@@ -821,7 +821,7 @@ set printer off
 set printer to
 fim := time()
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -839,18 +839,18 @@ function LR_CPRODUTO()
 local getlist:={} , L:=0 , TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 private Cod_Grupo := 0
 OPEN GRUPOS  ALIAS "_GRUPOS" INDEX CO2_GRUP,NO2_GRUP SHARED
-@ 23,12 say "Digite a Informa‡ao Acima Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite a Informaï¿½ao Acima Para a Emissao do Relatï¿½rio"
 beep(2)
 apaga(.T.)
 set key K_F2 to Gru_Help()
-moldura(08,35,10,77,.F.," Relat¢rio Produto Por Grupo")
-@ 09,37 say "C¢d. Grupo :"  get Cod_Grupo pict "99" valid (Cod_Grupo>0 .and. ;
+moldura(08,35,10,77,.F.," Relatï¿½rio Produto Por Grupo")
+@ 09,37 say "Cï¿½d. Grupo :"  get Cod_Grupo pict "99" valid (Cod_Grupo>0 .and. ;
   testa("_GRUPOS",Cod_Grupo,,09,53,"GpNome"))
 read
 set key K_F2 to
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio Produto Por Grupo " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio Produto Por Grupo " color ["W+*"]
 if lastkey()==K_ESC
    Close Databases
    set cursor on
@@ -865,7 +865,7 @@ dbgotop()
 dbseek(str(Cod_Grupo-1,2),.T.)
 do while ! eof()
   if L==0
-     Novo_Cab("Relat¢rio Produto/Grupo "+_GRUPOS->GpNome,{"C¢digo","Produto","Pre‡o de Venda"},{01,10,59})
+     Novo_Cab("Relatï¿½rio Produto/Grupo "+_GRUPOS->GpNome,{"Cï¿½digo","Produto","Preï¿½o de Venda"},{01,10,59})
      L+=6
   endif
   if PrGrupo = Cod_Grupo
@@ -883,7 +883,7 @@ do while ! eof()
      else
         L++
      endif
-     @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+     @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
      eject
      P++
      L := 0
@@ -894,7 +894,7 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -913,21 +913,21 @@ local getlist:={}, COD_INI:=0, COD_FIN:=0, C_INIC:=space(1), Conf:=space(1), TOD
 local C_FINAL:=space(1),L:=0,TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 cor := setcolor()
 apaga(.T.)
-@ 23,12 say "Digite o Produto Inicial e Final Para a emissao do Relat¢rio"
+@ 23,12 say "Digite o Produto Inicial e Final Para a emissao do Relatï¿½rio"
 beep(2)
 if IND = 1
-   moldura(12,50,15,78,.F.," Listagem de Pre‡o ")
+   moldura(12,50,15,78,.F.," Listagem de Preï¿½o ")
    @ 13,52 say "Produto Inicial :" get COD_INI   pict "9999" valid (COD_INI>0)
    @ 14,52 say "Poduto Final ...:" get COD_FIN   pict "9999" valid (COD_FIN>=COD_INI)
 else
-   moldura(08,30,11,78,.F.," Listagem de Pre‡o ")
+   moldura(08,30,11,78,.F.," Listagem de Preï¿½o ")
    @ 09,32 say "Caracter Inicial:" get C_INIC    pict "@!A" valid(!empty(C_INIC))
    @ 09,52 say "Caracter Final..:" get C_FINAL   pict "@!A" valid (!empty(C_FINAL) .AND. C_INIC<=C_FINAL)
-   @ 10,32 say "Salta Linha Ap¢s Inicio do Pr¢ximo Caracter:" get Conf Pict ;
+   @ 10,32 say "Salta Linha Apï¿½s Inicio do Prï¿½ximo Caracter:" get Conf Pict ;
                 "@!" valid( Conf $ "SN")
 endif
 read
-if alert("Imprimir produtos; com estoque zero?",{"Sim","N„o"})==1
+if alert("Imprimir produtos; com estoque zero?",{"Sim","Nï¿½o"})==1
    TODOS:=.T.
 else
    TODOS:=.F.
@@ -940,7 +940,7 @@ apaga(.F.)
 setcolor("&cor")
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Tabela de Pre‡o de Venda "color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Tabela de Preï¿½o de Venda "color ["W+*"]
 Imp_OK := Imp_Doc()
 P := 1
 OPEN UNMEDIDA  ALIAS "_UNMEDIDA" INDEX COD_UNMED,NOME_UNMED SHARED
@@ -969,7 +969,7 @@ if DESTINO <> "V"
         endif
         if Imprimir
            if L==0
-              Novo_Cab("Tabela de Pre‡os de Venda",{"C¢digo","Descricao do Produto","Unid.Medida","Pre‡o de Venda"},{01,10,42,57})
+              Novo_Cab("Tabela de Preï¿½os de Venda",{"Cï¿½digo","Descricao do Produto","Unid.Medida","Preï¿½o de Venda"},{01,10,42,57})
               L+=6
            endif
            if TODOS=.F.
@@ -996,7 +996,7 @@ if DESTINO <> "V"
              l++
            endif
         else
-           @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+           @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
            eject
            exit
         endif
@@ -1014,7 +1014,7 @@ if DESTINO <> "V"
            else
               L++
            endif
-           @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+           @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
            eject
            P++
            L := 0
@@ -1066,14 +1066,14 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,02,21,78,.F.," Impress„o na Tela ")
+   moldura(03,02,21,78,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
    Select Rel
    dbgotop()
-   NCAMP := "C¢digo" + space(02) + "Descricao do Produto" + space(12) + "Und.Medida" +space(8) + "Pre‡o de Venda"
-   Dbedit(04,03,20,77,,,,NCAMP,"Ä")
+   NCAMP := "Cï¿½digo" + space(02) + "Descricao do Produto" + space(12) + "Und.Medida" +space(8) + "Preï¿½o de Venda"
+   Dbedit(04,03,20,77,,,,NCAMP,"ï¿½")
    zap
 endif
 Close Databases
@@ -1088,7 +1088,7 @@ local getlist:={}
 local L := 0 , TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Tabela de Pre‡os Gerencial" color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Tabela de Preï¿½os Gerencial" color ["W+*"]
 Imp_OK := Imp_Doc()
 P := 1
 OPEN PRODUTOS ALIAS "_PRODUTOS" INDEX CO1_PROD,NO1_PROD,CO1_GRUP,Prod_GRUP SHARED
@@ -1098,8 +1098,8 @@ if DESTINO = "I"
    if Imp_OK
       do while ! eof()
         if L==0
-           Novo_Cab("Tabela de Pre‡os Gerencial",{"C¢d.","Produto",;
-           "Pre‡o Venda","Pre‡o Custo","% Ganho"},{01,06,44,56,68})
+           Novo_Cab("Tabela de Preï¿½os Gerencial",{"Cï¿½d.","Produto",;
+           "Preï¿½o Venda","Preï¿½o Custo","% Ganho"},{01,06,44,56,68})
            L+=6
         endif
         @ L,01 say PrCod
@@ -1115,7 +1115,7 @@ if DESTINO = "I"
            else
               L++
            endif
-           @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+           @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
            eject
            P++
            L := 0
@@ -1143,15 +1143,15 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,02,21,79,.F.," Impress„o na Tela ")
+   moldura(03,02,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
    Select Rel
    dbgotop()
-   NCAMP := "C¢d." + space(02) + "Produto" + space(30) + "Pre‡o Venda" + ;
-            space(2) + "Pre‡o Custo" + space(2) + "% Ganho"
-   Dbedit(04,03,20,78,,,,NCAMP,"Ä")
+   NCAMP := "Cï¿½d." + space(02) + "Produto" + space(30) + "Preï¿½o Venda" + ;
+            space(2) + "Preï¿½o Custo" + space(2) + "% Ganho"
+   Dbedit(04,03,20,78,,,,NCAMP,"ï¿½")
    zap
 endif
 Close Databases
@@ -1166,7 +1166,7 @@ local getlist:={}, Nome_Rel:=" "
 local L := Total:=0 , TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Valorizacao do Estoque Atual " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Valorizacao do Estoque Atual " color ["W+*"]
 Imp_OK := Imp_Doc()
 OPEN ITENSCOMP ALIAS "_ITENSCOMP" INDEX CO9_ICOMP,CPR_ICOMP,CDT_ICOMP,ICOMPDOC,CO9_ICDTP SHARED
 use parament alias _parament new
@@ -1181,13 +1181,13 @@ if DESTINO = "I"
       do while ! eof()
         if L==0
            if Tipo_Rel=="PC"
-              Nome_Rel:="Pre‡o Custo Final"
+              Nome_Rel:="Preï¿½o Custo Final"
            elseif Tipo_Rel=="PV"
-              Nome_Rel:= "Pre‡o Venda"
+              Nome_Rel:= "Preï¿½o Venda"
            elseif Tipo_Rel=="PN"
-              Nome_Rel:="Pre‡o Custo N.F."
+              Nome_Rel:="Preï¿½o Custo N.F."
            endif
-           Novo_Cab("Valorizacao do Estoque Atual",{"C¢d.","Produto",;
+           Novo_Cab("Valorizacao do Estoque Atual",{"Cï¿½d.","Produto",;
            "Est. Atual",Nome_Rel,"Valor Atual"},{01,06,38,51,64})
            L+=6
         endif
@@ -1236,7 +1236,7 @@ if DESTINO = "I"
            L++
            @ L,58 say "Total:" + transf(Total,"999,999.99")
            L++
-           @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+           @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
            eject
            P++
            L := 0
@@ -1305,22 +1305,22 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,02,21,79,.F.," Impress„o na Tela ")
+   moldura(03,02,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
    Select Rel
    dbgotop()
    if Tipo_Rel=="PC"
-      Nome_Rel:="Pre‡o Custo Final"
+      Nome_Rel:="Preï¿½o Custo Final"
    elseif Tipo_Rel=="PV"
-      Nome_Rel:= "Pre‡o Venda"
+      Nome_Rel:= "Preï¿½o Venda"
    elseif Tipo_Rel=="PN"
-      Nome_Rel:="Pre‡o Custo N.F."
+      Nome_Rel:="Preï¿½o Custo N.F."
    endif
-   NCAMP := "C¢d." + space(02) + "Produto" + space(25) + "Est. Atual" + ;
+   NCAMP := "Cï¿½d." + space(02) + "Produto" + space(25) + "Est. Atual" + ;
             space(2) + Nome_Rel + space(2) + "Valor Atual"
-   Dbedit(04,03,20,78,,,,NCAMP,"Ä")
+   Dbedit(04,03,20,78,,,,NCAMP,"ï¿½")
    zap
 endif
 Close Databases
@@ -1337,17 +1337,17 @@ local L,COD_INI:=COD_FIN:=0,Mensagem:=space(80)
 local TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 cor := setcolor()
 apaga(.T.)
-@ 23,12 say "Digite o Produto Inicial e Final Para a emissao do Relat¢rio"
+@ 23,12 say "Digite o Produto Inicial e Final Para a emissao do Relatï¿½rio"
 beep(2)
 if Rotina == 1
-   moldura(12,50,15,78,.F.," Relat¢rio Estoque Atual ")
-   Mensagem := "Aguarde, Gerando Relat¢rio Estoque Atual "
+   moldura(12,50,15,78,.F.," Relatï¿½rio Estoque Atual ")
+   Mensagem := "Aguarde, Gerando Relatï¿½rio Estoque Atual "
 elseif Rotina == 2
-   moldura(12,41,15,78,.F.," Relat¢rio Estoque N„o Controlado ")
-   Mensagem := "Aguarde, Gerando Relat¢rio Estoque Nao Controlado "
+   moldura(12,41,15,78,.F.," Relatï¿½rio Estoque Nï¿½o Controlado ")
+   Mensagem := "Aguarde, Gerando Relatï¿½rio Estoque Nao Controlado "
 else
-   moldura(12,41,15,78,.F.," Relat¢rio Estoque M¡nimo ")
-   Mensagem := "Aguarde, Gerando Relat¢rio Estoque M¡nimo "
+   moldura(12,41,15,78,.F.," Relatï¿½rio Estoque Mï¿½nimo ")
+   Mensagem := "Aguarde, Gerando Relatï¿½rio Estoque Mï¿½nimo "
 endif
 if IND = 1
    @ 13,52 say "Produto Inicial :" get COD_INI   pict "9999" valid (COD_INI>0)
@@ -1377,11 +1377,11 @@ if DESTINO <> "V"
       do while ! eof()
          if L==0
             if Rotina == 1
-               Novo_Cab("Estoque Atual",{"C¢digo","Nome do Produto","Estoque atual"},{01,09,50})
+               Novo_Cab("Estoque Atual",{"Cï¿½digo","Nome do Produto","Estoque atual"},{01,09,50})
             elseif Rotina == 2
-               Novo_Cab("Estoque Nao Controlado",{"C¢digo","Nome do Produto"},{01,09})
+               Novo_Cab("Estoque Nao Controlado",{"Cï¿½digo","Nome do Produto"},{01,09})
             else
-               Novo_Cab("Estoque Abaixo do M¡nimo Estipulado",{"C¢digo","Nome do Produto","Est.Atual","Est.M¡nimo","Diferen‡a"},{01,10,36,47,58})
+               Novo_Cab("Estoque Abaixo do Mï¿½nimo Estipulado",{"Cï¿½digo","Nome do Produto","Est.Atual","Est.Mï¿½nimo","Diferenï¿½a"},{01,10,36,47,58})
             endif
             L+=6
          endif
@@ -1425,7 +1425,7 @@ if DESTINO <> "V"
             else
               L++
             endif
-            @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+            @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
             eject
             P++
             L := 0
@@ -1484,22 +1484,22 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,16,21,70,.F.," Impress„o na Tela ")
+   moldura(03,16,21,70,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
    Select Rel
    dbgotop()
    if Rotina == 1
-      NCAMP := "C¢digo" + space(02) + "Produto" + space(25) + "Estoque Atual"
-      Dbedit(04,17,20,69,,,,NCAMP,"Ä")
+      NCAMP := "Cï¿½digo" + space(02) + "Produto" + space(25) + "Estoque Atual"
+      Dbedit(04,17,20,69,,,,NCAMP,"ï¿½")
    elseif Rotina == 2
-      NCAMP := "C¢digo" + space(02) + "Produto"+ space(25)
-      Dbedit(04,17,20,69,,,,NCAMP,"Ä")
+      NCAMP := "Cï¿½digo" + space(02) + "Produto"+ space(25)
+      Dbedit(04,17,20,69,,,,NCAMP,"ï¿½")
    else
-      moldura(03,02,21,79,.F.," Impress„o na Tela ")
-      NCAMP := "C¢digo" + space(02) + "Produto" + space(25) + "Est.Atual" + space(2) + "Est.M¡n." + space(2) + "Diferen‡a"
-      Dbedit(04,03,20,78,,,,NCAMP,"Ä")
+      moldura(03,02,21,79,.F.," Impressï¿½o na Tela ")
+      NCAMP := "Cï¿½digo" + space(02) + "Produto" + space(25) + "Est.Atual" + space(2) + "Est.Mï¿½n." + space(2) + "Diferenï¿½a"
+      Dbedit(04,03,20,78,,,,NCAMP,"ï¿½")
    endif
    zap
 endif
@@ -1516,7 +1516,7 @@ Valor   := {}
 Nome    := {}
 cor := setcolor()
 apaga(.T.)
-@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relatï¿½rio"
 beep(2)
 moldura(11,43,14,71,.F.," Produto ")
 @ 12,45 say "Data inicial .:" get DATA_INI  valid !empty(dtoc(DATA_INI))
@@ -1530,7 +1530,7 @@ apaga(.F.)
 setcolor("&cor")
 inicio := inicio1 := time()
 @ 23,10 say space(70)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Estat¡stica Por Produto " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Estatï¿½stica Por Produto " color ["W+*"]
 Imp_OK := Imp_Doc()
 OPEN PRODUTOS ALIAS "_PRODUTOS" INDEX CO1_PROD,NO1_PROD,CO1_GRUP,Prod_GRUP SHARED
 set order to Ind
@@ -1594,7 +1594,7 @@ P := 1
 if Imp_OK
  For i := 1 to Len(Produto)
   if L==0
-     NCab(DATA_INI,DATA_FIM,"Estatistica Por Produto",{"C¢digo","Produto","Faturamento","%"},{01,10,47,62})
+     NCab(DATA_INI,DATA_FIM,"Estatistica Por Produto",{"Cï¿½digo","Produto","Faturamento","%"},{01,10,47,62})
      L+=7
   endif
   if Valor[i] <> 0
@@ -1610,7 +1610,7 @@ if Imp_OK
      L++
      @ L,40 say "Total :" + transf(soma,"999,999.99")
      L++
-     @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+     @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
      eject
      P++
      L := 0
@@ -1622,7 +1622,7 @@ set printer off
 set printer to
 fim := time()
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -1643,7 +1643,7 @@ local NCliente_Vista := NCliente_Prazo := 0
 local DATA_INI:=DATA_FIM:=date() , FOperTipo := space(01)
 local HORA_INI:="06:00:00", HORA_FIM:=TIME()
 apaga(.T.)
-@ 23,12 say "Digite as Informa‡oes Acima Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite as Informaï¿½oes Acima Para a Emissao do Relatï¿½rio"
 beep(2)
 moldura(05,43,10,71,.F.," Fechamento do Caixa ")
 @ 06,45 say "Data Inicial :"  get DATA_INI  pict "99/99/99" valid (!EMPTY(dtoc(DATA_INI)))
@@ -1658,7 +1658,7 @@ if lastkey() == K_ESC
 endif
 apaga(.F.)
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Fechamento de Caixa " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Fechamento de Caixa " color ["W+*"]
 Imp_OK := Imp_Doc()
 OPEN OPERACOE ALIAS "_OPERACOE" INDEX CO4_OPER,NO4_OPER SHARED
 Nome_Arq := "Mov" + alltrim(str(Month(Nova_Data))) + right(alltrim(str(year(Nova_Data))),2)
@@ -1730,28 +1730,28 @@ if Imp_OK
  @ L+10,1 SAY "Vendas a Prazo : " + str(SF_Prazo,10,2)
  @ L+11,1 SAY "  Total Vendas : " + str(SF_Vista+SF_Prazo,10,2)
  @ L+12,1 SAY replicate ("=",36)
- @ L+13,1 SAY "N§ Clientes Compra a Vista : " + alltrim(str(NCliente_Vista))
- @ L+14,1 SAY "N§ Clientes Compra a Prazo : " + alltrim(str(NCliente_Prazo))
+ @ L+13,1 SAY "Nï¿½ Clientes Compra a Vista : " + alltrim(str(NCliente_Vista))
+ @ L+14,1 SAY "Nï¿½ Clientes Compra a Prazo : " + alltrim(str(NCliente_Prazo))
  @ L+15,1 SAY "Total de Clientes Atendidos: " +alltrim(str(NCliente_Vista+NCliente_Prazo))
  @ L+16,1 SAY replicate ("=",36)
  @ L+17,1 SAY "Receb.Vendas a Prazo : " + str(Tot_Prazo,10,2)
  @ L+18,1 SAY replicate ("=",36)
  @ L+19,1 SAY "Dinheiro em Caixa    : " + str(SF_Vista+Tot_Prazo,10,2)
  @ L+20,1 SAY replicate ("=",36)
- @ L+21,1 SAY "TeraByte - Inform tica"
+ @ L+21,1 SAY "TeraByte - Informï¿½tica"
 endif
 set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(05,25,21,64,.F.," Impress„o na Tela ")
+   moldura(05,25,21,64,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela " + "Tempo Gasto: " + ltrim(str(fim)) + " segundos"
    @ 23,11 say Mensagem
    texto := memoread("Tela.Prn")
    memoedit(Texto,06,26,20,63,.F.)
 elseif DESTINO ="I"
-   alert("Impress„o completa;Pressione algo para continuar!")
+   alert("Impressï¿½o completa;Pressione algo para continuar!")
 endif
 Close Databases
 return nil
@@ -1766,7 +1766,7 @@ local Dia_Ini := 0 , Dia_Fim := 0
 NData := {} ; VAvista := {} ; VPrazo := {} ; VCliente := {} ; VBonif := {}
 inicio := seconds()
 @ 23,10 say space(70)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Fechamento de Caixa Di rio " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Fechamento de Caixa Diï¿½rio " color ["W+*"]
 OPEN OPERACOE ALIAS "_OPERACOE" INDEX CO4_OPER,NO4_OPER SHARED
 Nome_Arq := "Mov" + alltrim(str(Month(Nova_Data))) + right(alltrim(str(year(Nova_Data))),2)
 IndM1    := "MCD" + alltrim(str(Month(Nova_Data))) + right(alltrim(str(year(Nova_Data))),2)
@@ -1774,7 +1774,7 @@ IndM2    := "MDT" + alltrim(str(Month(Nova_Data))) + right(alltrim(str(year(Nova
 OPEN "&Nome_Arq" ALIAS "_MOVIMENT" INDEX "&IndM1","&IndM2" SHARED
 set order to 2
 apaga(.T.)
-@ 23,12 say "Digite as Informa‡oes Acima Para a Emissao do Relat¢rio  "
+@ 23,12 say "Digite as Informaï¿½oes Acima Para a Emissao do Relatï¿½rio  "
 beep(2)
 moldura(05,43,08,71,.F.," Estatistica de Movimento ")
 @ 06,45 say "Dia Inicial :"  get Dia_Ini  pict "99" valid (dia_Ini >= 1 .and. dia_Ini <= 31)
@@ -1785,7 +1785,7 @@ if lastkey() == K_ESC
 endif
 apaga(.F.)
 @ 23,12 say space(70)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Estatistica de Venda " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Estatistica de Venda " color ["W+*"]
 if Nova_Data < date()
    do case
       case Month(Nova_Data) = 4 .or. Month(Nova_Data)=6 .or. Month(Nova_Data)=9 .or. Month(Nova_Data)=11
@@ -1910,7 +1910,7 @@ if Imp_OK
         @ L,55 say alltrim(str(TSF_Bonific))
         @ L,65 say alltrim(str(TSF_Vista+TSF_Prazo+TSF_Bonific))
         L++
-        @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",26)
+        @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",26)
         if L>=61 .or. i==Len(NData)
            eject
            P++
@@ -1923,14 +1923,14 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela " + "Tempo Gasto: " + ltrim(str(fim)) + " segundos"
    @ 23,11 say Mensagem
    texto := memoread("Tela.Prn")
    memoedit(Texto,04,02,20,78,.F.)
 elseif DESTINO ="I"
-   alert("Impress„o completa;Pressione algo para continuar!")
+   alert("Impressï¿½o completa;Pressione algo para continuar!")
 endif
 Close Databases
 return nil
@@ -1942,9 +1942,9 @@ local getlist:={}, L, Soma := SCliente := nElem := 0 , inicio , fim, TOTAL:=0
 local DATA_INI:=DATA_FIM:= DATE() , TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 EstFunc:={}
 apaga(.T.)
-@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relatï¿½rio"
 beep(2)
-moldura(12,43,15,71,.F.," Funcion rio ")
+moldura(12,43,15,71,.F.," Funcionï¿½rio ")
 @ 13,45 say "Data inicial .:" get DATA_INI  valid !empty(dtoc(DATA_INI))
 @ 14,45 say "Data final ...:" get DATA_FIM  valid (!empty(dtoc(DATA_FIM)) ;
  .and. Testa_Data(dtoc(DATA_INI),dtoc(DATA_FIM)))
@@ -1954,7 +1954,7 @@ if lastkey() == K_ESC
 endif
 apaga(.F.)
 @ 23,11 say space(70)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Estat¡stica Por Funcion rio "  color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Estatï¿½stica Por Funcionï¿½rio "  color ["W+*"]
 Imp_OK := Imp_Doc()
 use parament alias _parament new
 Comissao = Com_Func
@@ -2009,7 +2009,7 @@ if DESTINO<>"V"
    L:=iif(prow()<=58,prow()+2,1)
    @ L,01 say chr(14) + FIRMA
    L++
-   @ L,20 say alltrim("Estatistica Por Funcion rio")
+   @ L,20 say alltrim("Estatistica Por Funcionï¿½rio")
    L++
    @ L,54 say "Data Inicial: "+dtoc(DATA_INI)
    L++
@@ -2034,7 +2034,7 @@ if Imp_OK
  For i := 1 to Len(EstFunc)
   if EstFunc[i,2]>0 .and. EstFunc[i,3]>0
      if L==0
-        NCab(DATA_INI,DATA_FIM,"Estatistica Por Funcion rio",{"Funcion rio","Faturam.","%","Client","%","Com."+alltrim(str(Comissao))+"%"},{02,37,49,52,62,66})
+        NCab(DATA_INI,DATA_FIM,"Estatistica Por Funcionï¿½rio",{"Funcionï¿½rio","Faturam.","%","Client","%","Com."+alltrim(str(Comissao))+"%"},{02,37,49,52,62,66})
         L+=7
      endif
      Select _FUNCIONA
@@ -2061,7 +2061,7 @@ if Imp_OK
      @ L,18 say "Faturamento :" + transf(soma,"999,999.99")
      @ L,46 say "Clientes: " + alltrim(str(SCliente))
      L++
-     @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",26)
+     @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",26)
      if L>=61
         eject
         P++
@@ -2075,7 +2075,7 @@ set printer off
 set printer to
 fim := time()
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo Gasto: " + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -2094,7 +2094,7 @@ local getlist:={}, L, Soma := nElem := 0 , inicio , fim
 local DATA_INI:=DATA_FIM:= DATE() , TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 EstFunc:={}
 apaga(.T.)
-@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relatï¿½rio"
 beep(2)
 moldura(12,43,15,71,.F.," Grupos ")
 @ 13,45 say "Data inicial .:" get DATA_INI  valid !empty(dtoc(DATA_INI))
@@ -2106,7 +2106,7 @@ if lastkey() == K_ESC
 endif
 apaga(.F.)
 @ 23,11 say space(70)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Estat¡stica Por Grupo "  color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Estatï¿½stica Por Grupo "  color ["W+*"]
 Imp_OK := Imp_Doc()
 OPEN ESTGRUP ALIAS "_ESTGRUP" INDEX EST_GRUP SHARED
 OPEN GRUPOS  ALIAS "_GRUPOS" INDEX CO2_GRUP,NO2_GRUP SHARED
@@ -2175,7 +2175,7 @@ if Imp_OK
  For i := 1 to Len(EstFunc)
   if EstFunc[i,2]>0
      if L==0
-        NCab(DATA_INI,DATA_FIM,"Estatistica Por Grupo",{"C¢digo","Grupo","Faturamento","%"},{01,10,32,56})
+        NCab(DATA_INI,DATA_FIM,"Estatistica Por Grupo",{"Cï¿½digo","Grupo","Faturamento","%"},{01,10,32,56})
         L+=7
      endif
      Select _Grupos
@@ -2198,7 +2198,7 @@ if Imp_OK
      @ L,18 say "Faturamento :"
      @ L,33 say soma pict "999,999.99"
      L++
-     @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",26)
+     @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",26)
      if L>=61
         eject
         P++
@@ -2212,7 +2212,7 @@ set printer off
 set printer to
 fim := time()
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo Gasto: " + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -2231,7 +2231,7 @@ local getlist:={}
 local L , DATA_INI:=DATA_FIM:= DATE() ,TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 cor := setcolor()
 apaga(.T.)
-@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relatï¿½rio"
 beep(2)
 moldura(7,43,10,71,.F.," Contas a Pagar ")
 @ 08,45 say "Data Inicial .:" get DATA_INI  valid !empty(dtoc(DATA_INI))
@@ -2245,7 +2245,7 @@ apaga(.F.)
 setcolor("&cor")
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Contas a Pagar " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Contas a Pagar " color ["W+*"]
 Imp_OK := Imp_Doc()
 L := Tela := 0
 P := 1
@@ -2258,7 +2258,7 @@ Soma := 0
 if Imp_OK
  do while ! eof()
   if L==0
-     Novo_Cab("Relat¢rio de Contas a Pagar",{"N§ do Doc.","Nome Fornecedor","Dt. Venc.","Valor","Situa‡„o"},{01,12,33,45,60})
+     Novo_Cab("Relatï¿½rio de Contas a Pagar",{"Nï¿½ do Doc.","Nome Fornecedor","Dt. Venc.","Valor","Situaï¿½ï¿½o"},{01,12,33,45,60})
      L+=6
   endif
   if PgDataPrv >= DATA_INI .and. PgDataPrv <= DATA_FIM ;
@@ -2304,11 +2304,11 @@ if Imp_OK
         @ L,36 say "Total :"
         @ L,46 say soma pict "999,999.99"
         L++
-        @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+        @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
         eject
      else
         L := 59
-        @ L,00 say repl("-",28) + " TeraByte Inform tica " + repl("-",29)
+        @ L,00 say repl("-",28) + " TeraByte Informï¿½tica " + repl("-",29)
         eject
         P++
         L := 0
@@ -2321,7 +2321,7 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -2341,9 +2341,9 @@ local TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol()) , inicio , Fim
 inicio := time()
 @ 23,12 say space(69)
 If Ind == 1
-   @ 23,12 say "Aguarde, Gerando Relat¢rio de Contas a Receber Por Cliente" color ["W+*"]
+   @ 23,12 say "Aguarde, Gerando Relatï¿½rio de Contas a Receber Por Cliente" color ["W+*"]
 else
-   @ 23,12 say "Aguarde, Gerando Relat¢rio de Dias Sem Acerto do Contas a Receber" color ["W+*"]
+   @ 23,12 say "Aguarde, Gerando Relatï¿½rio de Dias Sem Acerto do Contas a Receber" color ["W+*"]
    Data_Atual = date()
 endif
 Imp_OK := Imp_Doc()
@@ -2355,9 +2355,9 @@ if Imp_OK
  do while ! eof()
   if L==0
      if Ind == 1
-        Novo_Cab("Relat¢rio de Contas a Receber",{"C¢digo","Nome do Cliente","Data Pendente","Total"},{01,08,43,65})
+        Novo_Cab("Relatï¿½rio de Contas a Receber",{"Cï¿½digo","Nome do Cliente","Data Pendente","Total"},{01,08,43,65})
      else
-        Novo_Cab("Relat¢rio de Contas a Receber",{"C¢digo","Nome do Cliente","Data Pendente","N§ Dias Sem Acerto"},{01,08,40,57})
+        Novo_Cab("Relatï¿½rio de Contas a Receber",{"Cï¿½digo","Nome do Cliente","Data Pendente","Nï¿½ Dias Sem Acerto"},{01,08,40,57})
      endif
      L+=6
   endif
@@ -2381,11 +2381,11 @@ if Imp_OK
         @ L,51 say "Total :"
         @ L,61 say Soma_Total pict "999,999.99"
         L++
-        @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+        @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
         eject
      else
         L := 59
-        @ L,00 say repl("-",28) + " TeraByte Inform tica " + repl("-",29)
+        @ L,00 say repl("-",28) + " TeraByte Informï¿½tica " + repl("-",29)
         eject
         P++
         L := 0
@@ -2398,7 +2398,7 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -2416,7 +2416,7 @@ function R_CONTASR2()
 local getlist:={} , L := Soma_Total := Soma_Doc := 0, DATA_INI:=DATA_FIM:= DATE()
 local TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol()) , inicio , Fim
 apaga(.T.)
-@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relat¢rio"
+@ 23,12 say "Digite a Data Inicial e Final Para a Emissao do Relatï¿½rio"
 beep(2)
 moldura(7,43,10,71,.F.," Contas a Receber ")
 @ 08,45 say "Data Inicial .:" get DATA_INI  valid !empty(dtoc(DATA_INI))
@@ -2429,7 +2429,7 @@ endif
 apaga(.F.)
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio de Contas a Receber " color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio de Contas a Receber " color ["W+*"]
 Imp_OK := Imp_Doc()
 P := 1
 OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
@@ -2452,7 +2452,7 @@ Soma_Total := Soma_Doc := 0
 if Imp_OK
  do while ! eof()
   if L==0
-     Novo_Cab("Relat¢rio de Contas a Receber",{"N§ do Doc.","Nome do Cliente","Data da Compra","Total do Doc."},{01,12,43,60})
+     Novo_Cab("Relatï¿½rio de Contas a Receber",{"Nï¿½ do Doc.","Nome do Cliente","Data da Compra","Total do Doc."},{01,12,43,60})
      L+=6
   endif
   if Rec_Dt >= DATA_INI .and. Rec_Dt <= DATA_FIM
@@ -2502,11 +2502,11 @@ if Imp_OK
         @ L,51 say "Total :"
         @ L,61 say Soma_Total pict "999,999.99"
         L++
-        @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+        @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
         eject
      else
         L := 59
-        @ L,00 say repl("-",28) + " TeraByte Inform tica " + repl("-",29)
+        @ L,00 say repl("-",28) + " TeraByte Informï¿½tica " + repl("-",29)
         eject
         P++
         L := 0
@@ -2519,7 +2519,7 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,01,21,79,.F.," Impress„o na Tela ")
+   moldura(03,01,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
@@ -2539,7 +2539,7 @@ local getlist:={}, DATA_ANTERIOR:=DATE(),ICMSC:=0,TEMICMSR:="N", PRECOCUSTO:=0
 local L := 0 , TELA_RELATORIO := savescreen(0,0,maxrow(),maxcol())
 inicio := time()
 @ 23,12 say space(69)
-@ 23,12 say "Aguarde, Gerando Relat¢rio ICMS Retido" color ["W+*"]
+@ 23,12 say "Aguarde, Gerando Relatï¿½rio ICMS Retido" color ["W+*"]
 Imp_OK := Imp_Doc()
 P := 1
 OPEN ITENSCOMP ALIAS "_ITENSCOMP" INDEX CO9_ICOMP,CPR_ICOMP,CDT_ICOMP,ICOMPDOC,CO9_ICDTP SHARED
@@ -2551,8 +2551,8 @@ if DESTINO = "I"
    if Imp_OK
       do while ! eof()
          if L==0
-            Novo_Cab("Tabela de Pre‡os Gerencial",{"C¢d.","Produto",;
-            "Pre‡o Venda","Pre‡o Custo","ICMS Ret."},{01,06,44,56,68})
+            Novo_Cab("Tabela de Preï¿½os Gerencial",{"Cï¿½d.","Produto",;
+            "Preï¿½o Venda","Preï¿½o Custo","ICMS Ret."},{01,06,44,56,68})
             L+=6
          endif
          DATA_ANTERIOR:=ctod("01/01/91")
@@ -2597,7 +2597,7 @@ if DESTINO = "I"
                else
                   L++
                endif
-               @ L,00 say repl("-",25) + " TeraByte Inform tica " + repl("-",25)
+               @ L,00 say repl("-",25) + " TeraByte Informï¿½tica " + repl("-",25)
                eject
                P++
                L := 0
@@ -2659,15 +2659,15 @@ set device to screen
 set printer off
 set printer to
 if DESTINO ="V"
-   moldura(03,02,21,79,.F.," Impress„o na Tela ")
+   moldura(03,02,21,79,.F.," Impressï¿½o na Tela ")
    @ 23,11 say space(70)
    Mensagem := "<ESC> - Retorna " + chr(24) + " Sobe Tela " + chr(25) + " Desce Tela" + " Tempo :" + elaptime(inicio,fim)
    @ 23,11 say Mensagem
    Select Rel
    dbgotop()
-   NCAMP := "C¢d." + space(02) + "Produto" + space(30) + "Pre‡o Venda" + ;
-            space(2) + "Pre‡o Custo" + space(2) + "ICMS Ret."
-   Dbedit(04,03,20,78,,,,NCAMP,"Ä")
+   NCAMP := "Cï¿½d." + space(02) + "Produto" + space(30) + "Preï¿½o Venda" + ;
+            space(2) + "Preï¿½o Custo" + space(2) + "ICMS Ret."
+   Dbedit(04,03,20,78,,,,NCAMP,"ï¿½")
    zap
 endif
 Close Databases

@@ -3,16 +3,16 @@
 # include "PAN.CH"
 # include "RCH.CH"
 # include "SETCURS.CH"
-# define  HEADSEP    "ÄÂÄ"
-# define  COLSEP     " ³ "
-# define  FOOTSEP    "ÄÁÄ"
+# define  HEADSEP    "ï¿½ï¿½ï¿½"
+# define  COLSEP     " ï¿½ "
+# define  FOOTSEP    "ï¿½ï¿½ï¿½"
 
 ********************
 function MOVIMENTO()
 ********************
 local GETLIST:={} , TELA_VENDA
 Mostra_Cliente := .F.
-if Testa_EData("Lan‡amento das Vendas ‚ Efetuado Apenas No Mes Corrente.." )
+if Testa_EData("Lanï¿½amento das Vendas ï¿½ Efetuado Apenas No Mes Corrente.." )
    Return nil
 endif
 if !TRotina(2)
@@ -46,13 +46,13 @@ do while .t.
  @ 05,62 say "Hora : " + FMovHr
  OPEN OPERACOE ALIAS "_OPERACOE" INDEX CO4_OPER,NO4_OPER SHARED
  if lastrec()=0
-    Alerta(11,15,"N„o H  Nenhuma Opera‡„o Cadastrada!!")
+    Alerta(11,15,"Nï¿½o Hï¿½ Nenhuma Operaï¿½ï¿½o Cadastrada!!")
     close Database
     return nil
  endif
  @ 05,04 say "N.Documento :" + alltrim(str(FMovCod))
- @ 05,25 say    "Opera‡„o :" get FMovOper  pict "99" ;
-   valid(pesquisa(06,25,12,65,"_OPERACOE",FMovOper,"OperCod","OperNome"," Opera‡ao ") ;
+ @ 05,25 say    "Operaï¿½ï¿½o :" get FMovOper  pict "99" ;
+   valid(pesquisa(06,25,12,65,"_OPERACOE",FMovOper,"OperCod","OperNome"," Operaï¿½ao ") ;
    .and. !Empty(FMovOper) .and. testa("_OPERACOE",FMovOper,,05,39,"OperNome"))
  read
  select _OPERACOE
@@ -69,7 +69,7 @@ do while .t.
  close _OPERACOE
  OPEN FUNCIONA ALIAS "_FUNCIONA" INDEX CO3_FUNC, NO3_FUNC, CargoFunc SHARED
  if lastrec()=0
-    Alerta(11,15,"N„o H  Nenhum Funmcion rio Cadastrado!!")
+    Alerta(11,15,"Nï¿½o Hï¿½ Nenhum Funmcionï¿½rio Cadastrado!!")
     close Database
     return nil
  endif
@@ -81,9 +81,9 @@ do while .t.
     close _FUNCIONA
     return nil
  endif
- HelpVar("<ENTER> Visualizar Dados de Funcion rio <ESC> Retorna <F10> Calculadora",80,23,00)
- @ Nova_Lin,04 say "Funcion rio :" get FMovFunc PICT "99" ;
-   valid(pesquisa2(08,10,14,50,"_FUNCIONA",FMovFunc,"FunCod","FuncNome"," Funcion rios ") ;
+ HelpVar("<ENTER> Visualizar Dados de Funcionï¿½rio <ESC> Retorna <F10> Calculadora",80,23,00)
+ @ Nova_Lin,04 say "Funcionï¿½rio :" get FMovFunc PICT "99" ;
+   valid(pesquisa2(08,10,14,50,"_FUNCIONA",FMovFunc,"FunCod","FuncNome"," Funcionï¿½rios ") ;
    .and. !Empty(FMovFunc) .and. testa("_FUNCIONA",FMovFunc,,Nova_Lin,22,"FuncNome"))
  read
  OPEN CARGOS ALIAS "_CARGOS" INDEX CargCod,CargNome SHARED
@@ -91,7 +91,7 @@ do while .t.
  dbgotop()
  dbseek(_FUNCIONA->FuncCarg)
  if HabilitaVC <> "S"
-    Alerta(11,15,"Funcion rio N„o Est  Habilitado Para Execu‡„o da Fun‡„o..")
+    Alerta(11,15,"Funcionï¿½rio Nï¿½o Estï¿½ Habilitado Para Execuï¿½ï¿½o da Funï¿½ï¿½o..")
     restscreen(0,0,maxrow(),maxcol(),TELA_VENDA)
     close _FUNCIONA
     close _CARGOS
@@ -102,7 +102,7 @@ do while .t.
  If Mostra_Cliente
     OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
     if lastrec()=0
-       Alerta(11,15,"N„o H  Nenhum Cliente Cadastrado!!")
+       Alerta(11,15,"Nï¿½o Hï¿½ Nenhum Cliente Cadastrado!!")
        close Database
        return nil
     endif
@@ -167,14 +167,14 @@ Function TbFecha_Venda(FMovCod1,FMovOper,FMovFunc,FCodCli)
     set decimals to 2
  endif
  if Liquido<=0
-    alert("Opera‡„o Imposs¡vel!!!; Valor L¡quido Deu Negativo!!!!")
+    alert("Operaï¿½ï¿½o Impossï¿½vel!!!; Valor Lï¿½quido Deu Negativo!!!!")
     SetColor(Cor_Antiga)
     restscreen(0,0,maxrow(),maxcol(),Tela_Fechamento)
     close _OPERACOE
     return nil
  endif
  if Liquido < Total_Custo
-    if alert("Valor L¡quido Menor;Que Pre‡o de Custo;;Deseja Continuar",{"Sim","N„o"}) <> 1
+    if alert("Valor Lï¿½quido Menor;Que Preï¿½o de Custo;;Deseja Continuar",{"Sim","Nï¿½o"}) <> 1
        SetColor(Cor_Antiga)
        restscreen(0,0,maxrow(),maxcol(),Tela_Fechamento)
        close _OPERACOE
@@ -183,7 +183,7 @@ Function TbFecha_Venda(FMovCod1,FMovOper,FMovFunc,FCodCli)
  endif
  @ 13,41 say "Liquido: " + str(Liquido,10,2)
  Total_Pago:=Liquido
- if (Nome_Operacao<>"ORCAMENTO" .and. Nome_Operacao<>"OR€AMENTO")
+ if (Nome_Operacao<>"ORCAMENTO" .and. Nome_Operacao<>"ORï¿½AMENTO")
      @ 13,32 say "   Valor Pago  (R$):" Get Total_Pago Pict "999,999.99" ;
       valid (Testa_Troco(Total_Pago,Liquido))
     Read
@@ -195,7 +195,7 @@ Function TbFecha_Venda(FMovCod1,FMovOper,FMovFunc,FCodCli)
     close _OPERACOE
     return nil
  endif
- if Nome_Operacao=="ORCAMENTO" .or. Nome_Operacao=="OR€AMENTO"
+ if Nome_Operacao=="ORCAMENTO" .or. Nome_Operacao=="ORï¿½AMENTO"
     @ 16,31 say "Imprime<" +alltrim(Nome_Operacao)+"> (S/N)?" Get Conf Pict "@!" valid( Conf $ "SN")
     Read
   else
@@ -208,10 +208,10 @@ Function TbFecha_Venda(FMovCod1,FMovOper,FMovFunc,FCodCli)
     restscreen(0,0,maxrow(),maxcol(),Tela_Fechamento)
     return nil
  endif
- if (Conf == "S") .and. (Nome_Operacao=="ORCAMENTO" .or. Nome_Operacao=="OR€AMENTO")
-    if (FT_ISPRINTER(), IMP_VENDA(VCOD,VQTD,VPRE,Total_Pago), alert("Or‡amento conclu¡do.;Pressione algo para continuar!"))
+ if (Conf == "S") .and. (Nome_Operacao=="ORCAMENTO" .or. Nome_Operacao=="ORï¿½AMENTO")
+    if (FT_ISPRINTER(), IMP_VENDA(VCOD,VQTD,VPRE,Total_Pago), alert("Orï¿½amento concluï¿½do.;Pressione algo para continuar!"))
  elseif Conf=="S"
-   if (FT_ISPRINTER(), IMP_VENDA(VCOD,VQTD,VPRE,Total_Pago), alert("Venda conclu¡da.;Pressione algo para continuar!"))
+   if (FT_ISPRINTER(), IMP_VENDA(VCOD,VQTD,VPRE,Total_Pago), alert("Venda concluï¿½da.;Pressione algo para continuar!"))
    if LEN(VCOD) > 0
       do while .t.
          Cont_Err++
@@ -392,8 +392,8 @@ OBJETO:headSep   := HEADSEP
 OBJETO:footSep   := FOOTSEP
 OBJETO:colorSpec := MYCOLORS
 @ 08,02 to 08,78
-@ 08,01 say "Ã"
-@ 08,78 say "´"
+@ 08,01 say "ï¿½"
+@ 08,78 say "ï¿½"
 NInserir := .T.
 if LEN(VCOD)=0
    TbVendaInsert()
@@ -410,7 +410,7 @@ OBJETO : skipblock := {|Tam| nMoved := if(abs(Tam) >= ;
 OBJETO : goBottomblock := {||ponteiro := len(VCOD)}
 OBJETO : goTopblock := {||ponteiro := 1}
 
-oCol := TBCOLUMNNEW( "C¢d.", {|| VCOD[ponteiro]})
+oCol := TBCOLUMNNEW( "Cï¿½d.", {|| VCOD[ponteiro]})
 oCol:picture := "9999"
 OBJETO:addColumn(oCol)
 
@@ -422,7 +422,7 @@ oCol := TBCOLUMNNEW( "Qtde", {|| VQTD[ponteiro]})
 oCol:picture := "99999.999"
 OBJETO:addColumn(oCol)
 
-oCol := TBCOLUMNNEW( "Pre‡o Unit.", {|| Ret_PRECO(VCOD[ponteiro])})
+oCol := TBCOLUMNNEW( "Preï¿½o Unit.", {|| Ret_PRECO(VCOD[ponteiro])})
 oCol:picture := "999999999.99"
 OBJETO:addColumn(oCol)
 
@@ -462,7 +462,7 @@ while .T.
      do while ! OBJETO:stabilize() ; enddo
        if OBJETO:hitTop
           tone(1000,2)
-          HelpVar("Mensagem: In¡cio de arquivo!",80,23,00)
+          HelpVar("Mensagem: Inï¿½cio de arquivo!",80,23,00)
           setcursor(SC_NONE)
        elseif OBJETO:hitBottom
           tone(1000,2)
@@ -528,8 +528,8 @@ HelpVar("Mensagem: <F10> Calculadora <F2> Pesquisa Produto",80,23,00)
 set cursor on
 set key K_F2 to Produto_Help()
 @ 06,39 say "    Produto:" get CODIGO pict "9999" valid (TESTA_PRO(CODIGO,@PRECO))
-@ 07,39 say "  Descri‡ao:"
-@ 08,39 say "Pre‡o Venda:"
+@ 07,39 say "  Descriï¿½ao:"
+@ 08,39 say "Preï¿½o Venda:"
 read
 set key K_F2 to
 if Codigo == 0 .and. len(VCOD) > 0 .or. lastkey()==K_ESC
@@ -544,7 +544,7 @@ if Codigo == 0 .and. len(VCOD) > 0 .or. lastkey()==K_ESC
    return nil
 endif
 if Codigo <> 0
-   @ 09,39 say "Pre‡o Custo:" +transf(PrPCusto,"999,999.99")
+   @ 09,39 say "Preï¿½o Custo:" +transf(PrPCusto,"999,999.99")
    @ 10,46 say "Qtde:" get QTDVENDA   pict "9999.999" valid ;
                        (QTDVENDA>0 .and. TESTA_QUANTIDADE(CODIGO,QTDVENDA,0,.T.)) ;
                        when (Codigo>0)
@@ -562,7 +562,7 @@ if Codigo <> 0
          set decimals to 2
       endif
       if Liquido<=0
-         alert("Opera‡„o Imposs¡vel!!!; Valor L¡quido Deu Negativo!!!!")
+         alert("Operaï¿½ï¿½o Impossï¿½vel!!!; Valor Lï¿½quido Deu Negativo!!!!")
          SetColor(Cor_Antiga)
          restscreen(0,0,24,79,TELA_INSERT)
          return nil
@@ -611,10 +611,10 @@ Percentual := "%"
 TESTA_PRO(CODIGO,@PRECO)
 @ 06,43 say "Produto:"    get CODIGO     pict "9999" valid ;
    (TESTA_PRO(CODIGO,@PRECO) .and. CODIGO > 0)
-@ 07,41 say "Descri‡ao:"
-@ 08,39 say "Pre‡o Venda:"
+@ 07,41 say "Descriï¿½ao:"
+@ 08,39 say "Preï¿½o Venda:"
 read
-@ 09,39 say "Pre‡o Custo:" +transf(PrPCusto,"999,999.99")
+@ 09,39 say "Preï¿½o Custo:" +transf(PrPCusto,"999,999.99")
 if lastkey()<>K_ESC
    @ 10,46 say "Qtde:" get QTDVENDA   pict "9999.999" valid (QTDVENDA<>0 .and. ;
            TESTA_QUANTIDADE(CODIGO,QTDVENDA,IND,.T.)) when CODIGO<>0
@@ -633,7 +633,7 @@ if lastkey()<>K_ESC
       set decimals to 2
    endif
    if Liquido<=0
-      alert("Opera‡„o Imposs¡vel!!!; Valor L¡quido Deu Negativo!!!!")
+      alert("Operaï¿½ï¿½o Impossï¿½vel!!!; Valor Lï¿½quido Deu Negativo!!!!")
       SetColor(Cor_Antiga)
       restscreen(0,0,maxrow(),maxcol(),TELA_EDIT)
       return nil
@@ -687,7 +687,7 @@ function CMOVIMENTO()
 local GETLIST:={} , CONF := " "
 public VNOMEPRO:={} , NDoc := 0
 public VCOD:={},VQTD:={},VSUBTOTAL:={},VPRE:={},VDEC:={}, VLIQUIDO:={}
-if Testa_EData("Cancelamento das Vendas ‚ Efetuado Apenas No Mes Corrente..")
+if Testa_EData("Cancelamento das Vendas ï¿½ Efetuado Apenas No Mes Corrente..")
    Return nil
 endif
 if !TRotina(3)
@@ -732,10 +732,10 @@ dbseek(NDOC)
 moldura(04,02,21,78,.F.," Cancelamento de Venda ")
 @ 05,05 say "Documento : " color ["&cor_Apresentacao"]
 @ 05,17 say + alltrim(str(NDoc))
-@ 05,35 say "Funcion rio :" color ["&cor_Apresentacao"]
+@ 05,35 say "Funcionï¿½rio :" color ["&cor_Apresentacao"]
 @ 05,49 say + alltrim(str(MovFunc)) + " - "
 testa("_FUNCIONA",MovFunc,,05,53,"FuncNome")
-@ 06,06 say "Opera‡„o : " color ["&cor_Apresentacao"]
+@ 06,06 say "Operaï¿½ï¿½o : " color ["&cor_Apresentacao"]
 @ 06,17 say + alltrim(str(MovOper)) + " - "
 testa("_OPERACOE",MovOper,,06,21,"OperNome")
 SomaTotal(.F.,.F.)
@@ -749,7 +749,7 @@ OBJETO : goBottomblock := {||ponteiro := len(VCOD)}
 OBJETO : goTopblock := {||ponteiro := 1}
 
 
-oCol := TBCOLUMNNEW( "C¢digo", {|| VCOD[ponteiro]})
+oCol := TBCOLUMNNEW( "Cï¿½digo", {|| VCOD[ponteiro]})
 oCol:picture := "9999"
 OBJETO:addColumn(oCol)
 
@@ -761,7 +761,7 @@ oCol := TBCOLUMNNEW( "Quantidade", {|| VQTD[ponteiro]})
 oCol:picture := "9999.999"
 OBJETO:addColumn(oCol)
 
-oCol := TBCOLUMNNEW( "Pre‡o Unit.", {|| VPRE[ponteiro] })
+oCol := TBCOLUMNNEW( "Preï¿½o Unit.", {|| VPRE[ponteiro] })
 oCol:picture := "999999999.99"
 OBJETO:addColumn(oCol)
 
@@ -785,7 +785,7 @@ while .T.
      do while ! OBJETO:stabilize() ; enddo
        if OBJETO:hitTop
           tone(1000,2)
-          HelpVar("Mensagem: In¡cio de arquivo!",80,23,00)
+          HelpVar("Mensagem: Inï¿½cio de arquivo!",80,23,00)
           msg(23,00,"")
           setcursor(SC_NONE)
        elseif OBJETO:hitBottom
@@ -1012,7 +1012,7 @@ OPEN UNMEDIDA  ALIAS "_UNMEDIDA" INDEX COD_UNMED,NOME_UNMED SHARED
 @ PROW(),36  say "Hora: "+FMovHr
 @ PROW()+1,0 say substr(OPERACAO,1,25)
 @ PROW(),36  say "DOC: "+alltrim(str(FMovCod))
-@ PROW()+1,0 SAY "Funcion rio: " + substr(NFUNCIONARIO,1,35)
+@ PROW()+1,0 SAY "Funcionï¿½rio: " + substr(NFUNCIONARIO,1,35)
 @ PROW()+1,0 SAY REPLICATE("=",55)
 @ PROW()+1,0 say "Produto"
 @ PROW(),36  say "Unidade de Medida"
@@ -1036,19 +1036,19 @@ next
 @ PROW()+1,00 SAY REPLICATE("=",55)
 @ PROW()+1,20 say "Total Bruto "+padl(str(Total_Pagar,13,2),13)
 @ PROW()+1,20 say "Desconto"+ padl(str(FDESCONTO,4),13)+"%"
-if Nome_Operacao=="ORCAMENTO" .or. Nome_Operacao=="OR€AMENTO"
+if Nome_Operacao=="ORCAMENTO" .or. Nome_Operacao=="ORï¿½AMENTO"
    @ PROW()+1,20 say "Total Pagar "+padl(str(Total_Pagar-(Total_Pagar*FDesconto/100),13,2),13)
 else
    @ PROW()+1,20 say "Liquido     "+padl(str(Liquido,13,2),13)
    @ PROW()+1,20 say "Total pago  "+padl(str(Total_Pago,13,2),13)
    @ PROW()+1,20 say "     Troco  "+padl(str(Total_Pago-Liquido),13)
 endif
-@ PROW()+1,00 SAY "============= DOCUMENTO SEM VALOR FISCAL =============+"
+@ PROW()+1,00 SAY "============= 12DOCUMENTO SEM VALOR FISCAL =============+"
 @ PROW()+2,00 SAY ""
 If Mostra_Cliente
     OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
     if lastrec()=0
-       Alerta(11,15,"N„o H  Nenhum Cliente Cadastrado!!")
+       Alerta(11,15,"Nï¿½o Hï¿½ Nenhum Cliente Cadastrado!!")
        close Database
        return nil
     else
@@ -1062,7 +1062,19 @@ select _PRODUTOS
 set order to 1
 @ prow(),pcol() say chr(18)
 SET DEVICE TO SCREEN
-alert(MSG_IMPRESSAO_COMPLETA)
+//alert(MSG_IMPRESSAO_COMPLETA)
+OPEN ITENSCOMP ALIAS "_ITENSCOMP" INDEX CO9_ICOMP,CPR_ICOMP,CDT_ICOMP,ICOMPDOC,CO9_ICDTP SHARED
+select _ITENSCOMP
+set order to 2
+if dbseek(4)
+   CLS // LIMPA A TELA// L? O(S) GET(S) - ESPERA ENTRADA DO TECLADO
+      // SE FINALIZAR COM [ENTER] ATRIBUI O VALOR ? cNOME
+      // SE SAIR COM [ESC] cNOME PERMANECE = SPACE(35)
+   @ 02,10 SAY "VOC? DISSE QUE ERA "
+   @ 18,09 say "ICMS Retido na Fonte: " + str(_ITENSCOMP->IcPrICMS) 
+   alert(MSG_IMPRESSAO_COMPLETA)
+endif
+close _ITENSCOMP
 close _UNMEDIDA
 return NIL
 
@@ -1071,7 +1083,7 @@ function Baixa_Pagamento()
 **************************
 local GETLIST:={} , CONF := " " , NDoc := 0 , Cod_For := 0 , Achou := .F.
 public NF:={}, DTCOMPR:={}, VALORCOM :={}, DOC_COMPR := {}
-if Testa_EData("Baixa de Pagamento ‚ Efetuado Apenas No Mes Corrente..")
+if Testa_EData("Baixa de Pagamento ï¿½ Efetuado Apenas No Mes Corrente..")
    Return nil
 endif
 if !TRotina(8)
@@ -1085,7 +1097,7 @@ inic_var()
 moldura(16,40,18,74,.F.," Baixa de Pagamentos ")
 HelpVar("<Esc> - Sai <F2> Pesquisa Fornecedor",70,23,10)
 set key K_F2 to For_Help()
-@ 17,42 say "C¢digo Fornecedor :" get Cod_For pict "999"    valid (!EMPTY(Cod_For) .or. Cod_For > 0)
+@ 17,42 say "Cï¿½digo Fornecedor :" get Cod_For pict "999"    valid (!EMPTY(Cod_For) .or. Cod_For > 0)
 read
 set key K_F2 to
 if lastkey()=K_ESC
@@ -1096,7 +1108,7 @@ Endif
 if Dbseek(Cod_For)
    TbMostraPgto(Cod_For)
 else
-   Alert("N„o Houve Compra;Desse Fornecedor")
+   Alert("Nï¿½o Houve Compra;Desse Fornecedor")
 endif
 CLOSE _FORNECED
 CLOSE _PAGAMENT
@@ -1119,11 +1131,11 @@ OBJETO:colorSpec := MYCOLORS
 Rel_Pgtos(Cod_For)  //gerar vetores
 
 if LEN(NF)=0
-   Alert("N„o H  Pagamento(s);A Ser(em) Feito(s);A Esse Fornecedor")
+   Alert("Nï¿½o Hï¿½ Pagamento(s);A Ser(em) Feito(s);A Esse Fornecedor")
    return nil
 endif
 moldura(04,02,21,78,.F.," Baixa de Pagamento ")
-@ 05,03 say "C¢d. Fornecedor: " color ["&cor_Apresentacao"]
+@ 05,03 say "Cï¿½d. Fornecedor: " color ["&cor_Apresentacao"]
 @ 05,22 say + alltrim(str(Cod_For)) + " - "
 testa("_FORNECED",Cod_For,,05,26,"ForNome")
 select _PAGAMENT
@@ -1137,7 +1149,7 @@ OBJETO : skipblock := {|Tam| nMoved := if(abs(Tam) >= ;
 OBJETO : goBottomblock := {||ponteiro := len(NF)}
 OBJETO : goTopblock := {||ponteiro := 1}
 
-OCOLUNA := tbcolumnnew(" û" , {|| iif((DOC_COMPR[ponteiro]=DOC_PGTO .and. DTCOMPR[ponteiro]=DATA_PGTO)," û", "  ")})
+OCOLUNA := tbcolumnnew(" ï¿½" , {|| iif((DOC_COMPR[ponteiro]=DOC_PGTO .and. DTCOMPR[ponteiro]=DATA_PGTO)," ï¿½", "  ")})
 OBJETO:addColumn(OCOLUNA)
 
 oCol := TBCOLUMNNEW( "Nota Fiscal", {|| NF[ponteiro]})
@@ -1162,7 +1174,7 @@ while .T.
      do while ! OBJETO:stabilize() ; enddo
        if OBJETO:hitTop
           tone(1000,2)
-          HelpVar("Mensagem: In¡cio de arquivo!",80,23,00)
+          HelpVar("Mensagem: Inï¿½cio de arquivo!",80,23,00)
           setcursor(SC_NONE)
        elseif OBJETO:hitBottom
           tone(1000,2)
@@ -1242,7 +1254,7 @@ AKEYS := ;
         if DOC_PGTO <>0 .and.  DATA_PGTO <> ctod("")
            Fecha_Pgto(DOC_PGTO,DATA_PGTO)
         else
-          alert("Vocˆ necessita selecionar ;algum pgto a ser baixado!!!!")
+          alert("Vocï¿½ necessita selecionar ;algum pgto a ser baixado!!!!")
         endif
       case nkey = K_SPACE
          if DOC_PGTO = DOC_COMPR[ponteiro] .and.  DATA_PGTO = DTCOMPR[ponteiro]
@@ -1288,16 +1300,16 @@ do while !eof()
       dbseek(Codigo)
       @ 08,39 say alltrim(substr(ForNome,1,20))
       select _PAGAMENT
-      @ 10,26 say repl("Ä",38)
-      @ 10,29 say " Previs„o "
+      @ 10,26 say repl("ï¿½",38)
+      @ 10,29 say " Previsï¿½o "
       @ 11,27 say "Data  : " + transf(Dtoc(FPgDataPrv),"99/99/99")
       @ 12,27 say "Valor : " + str(FPgValorPrv)
-      @ 14,26 say repl("Ä",38)
+      @ 14,26 say repl("ï¿½",38)
       @ 14,29 say " Pagamento "
       @ 15,27 say "Data  :" Get FPgData Pict "99/99/99" valid(!Empty(FPgData))
       @ 16,27 say "Valor :" Get FPgValor Valid(FPgValor>=FPgValorPrv)
       Read
-      if confirma(" Confirma Grava‡„o ?") == 1
+      if confirma(" Confirma Gravaï¿½ï¿½o ?") == 1
          do while ! rlock()
          enddo
          reply_var(.T.)
@@ -1341,7 +1353,7 @@ set order to 1
 if dbseek(COD)
   Return substr(PrNome,1,35)
 else
-  Alerta(05,15,"Produto N„o Cadastrado No Sistema..")
+  Alerta(05,15,"Produto Nï¿½o Cadastrado No Sistema..")
   return .F.
 endif
 Return nil
@@ -1357,7 +1369,7 @@ set order to 1
 if dbseek(COD)
   Return PrPVenda
 else
-  Alerta(05,15,"Produto N„o Cadastrado No Sistema..")
+  Alerta(05,15,"Produto Nï¿½o Cadastrado No Sistema..")
   return .F.
 endif
 return nil
@@ -1373,7 +1385,7 @@ set order to 1
 if dbseek(COD)
   Return (PrPVenda*QTDE)
 else
-  Alerta(05,15,"Produto N„o Cadastrado No Sistema..")
+  Alerta(05,15,"Produto Nï¿½o Cadastrado No Sistema..")
   return .F.
 endif
 return nil
@@ -1409,7 +1421,7 @@ function RECEBIMENTO()
 **********************
 local GETLIST:={},TELA_RECEBIMENTO := savescreen(0,0,24,79)
 FDT_RECEB:=date()
-if Testa_EData("Baixa No Recebimeto ‚ Efetuado Apenas No Mes Corrente..")
+if Testa_EData("Baixa No Recebimeto ï¿½ Efetuado Apenas No Mes Corrente..")
    Return nil
 endif
 if !TRotina(11)
@@ -1425,7 +1437,7 @@ OPEN RECEB ALIAS "_RECEB" INDEX RCodDt,RCodCli,RecDt SHARED
 set order to 2
 do while .t.
  FRec_Cli := 0
- @ 06,05 say   "C¢digo Cliente:" get FRec_Cli  pict "999" ;
+ @ 06,05 say   "Cï¿½digo Cliente:" get FRec_Cli  pict "999" ;
    valid(pesquisa(07,18,15,67,"_Clientes",FRec_Cli ,"ClCod","ClNome"," Clientes ");
    .and. testa("_CLIENTES",FRec_Cli,,06,25,"ClNome"))
  @ 07,05 say " Data Receb.:" get FDT_RECEB
@@ -1467,7 +1479,7 @@ if dbseek(FRec_Cli)
       endif
    enddo
 else
-  alert("Cliente n„o possui nenhuma compra")
+  alert("Cliente nï¿½o possui nenhuma compra")
   set cursor on
   @ 06,05 say space(50)
   return nil
@@ -1494,8 +1506,8 @@ OBJETO : goBottomblock := {||ponteiro := len(VCOD)}
 OBJETO : goTopblock := {||ponteiro := 1}
 
 
-OCOLUNA := tbcolumnnew(" û" , {|| iif(Ascan(SELECIONADO, {|aVal| aVal==PONTEIRO})>0;
-                                 , " û", "  ")})
+OCOLUNA := tbcolumnnew(" ï¿½" , {|| iif(Ascan(SELECIONADO, {|aVal| aVal==PONTEIRO})>0;
+                                 , " ï¿½", "  ")})
 OBJETO:addColumn(OCOLUNA)
 
 oCol := TBCOLUMNNEW( "Documento", {|| VCOD[ponteiro]})
@@ -1526,7 +1538,7 @@ while .T.
      do while ! OBJETO:stabilize() ; enddo
        if OBJETO:hitTop
           tone(1000,2)
-          HelpVar("Mensagem: In¡cio de arquivo!",80,23,00)
+          HelpVar("Mensagem: Inï¿½cio de arquivo!",80,23,00)
           setcursor(SC_NONE)
        elseif OBJETO:hitBottom
           tone(1000,2)
@@ -1743,7 +1755,7 @@ set order to 1
 @ 23,00 say "<ESC> Retorna <Enter> Help do Cliente <F10> Calculadora"
 dbgotop()
 moldura(07,25,20,65,.f.," Recebimento de Cliente ")
-@ 08,26 say "C¢digo Cliente :" Get Cliente pict "999" valid(pesquisa(06,18,15,67,"_Clientes",Cliente,"ClCod","ClNome"," Clientes "))
+@ 08,26 say "Cï¿½digo Cliente :" Get Cliente pict "999" valid(pesquisa(06,18,15,67,"_Clientes",Cliente,"ClCod","ClNome"," Clientes "))
 //valid(Cliente > 0)
 read
 if dbseek(Cliente)
@@ -1754,7 +1766,7 @@ if dbseek(Cliente)
    FPendente   := ClPendente
    if FValor_Doc > 0 .or. FPendente > 0
       select _MOVREC
-      @ 10,26 say repl("Ä",38)
+      @ 10,26 say repl("ï¿½",38)
       @ 11,27 say "Data Recebimento  :" Get FData_Rec Pict "99/99/99" valid(!Empty(FData_Rec))
       @ 13,27 say "Valor do Documento:" + str(FValor_Doc)
       @ 15,27 say "Valor Pendente    :" + str(FPendente)
@@ -1762,7 +1774,7 @@ if dbseek(Cliente)
       @ 19,27 say "       Valor Pago :" Get FValor_Rec Pict "999,999.99" valid(FValor_Rec>0)
       Read
       @ 23,00 say Space(80)
-      @ 23,00 say "Mensagem: Confirma Grava‡ao (S/N) ?" get CONF pict "@!" valid CONF $"SN"
+      @ 23,00 say "Mensagem: Confirma Gravaï¿½ao (S/N) ?" get CONF pict "@!" valid CONF $"SN"
       read
       if CONF=="S"
          FPendente := (FValor_Doc + FPendente) - FValor_Rec
@@ -1778,7 +1790,7 @@ if dbseek(Cliente)
          unlock
       endif
    else
-     Alerta(11,15," N„o Existe Nenhum Recebimento Pendente !!")
+     Alerta(11,15," Nï¿½o Existe Nenhum Recebimento Pendente !!")
    endif
 endif
 close _CLIENTES
