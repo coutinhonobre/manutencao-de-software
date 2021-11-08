@@ -991,6 +991,24 @@ endif
 return nil
 
 ******************************************
+function IMP_VENDA_FISCAL()
+******************************************
+OPEN ITENSCOMP ALIAS "_ITENSCOMP" INDEX CO9_ICOMP,CPR_ICOMP,CDT_ICOMP,ICOMPDOC,CO9_ICDTP SHARED
+select _ITENSCOMP
+set order to 2
+if dbseek(4)
+   CLS // LIMPA A TELA// L? O(S) GET(S) - ESPERA ENTRADA DO TECLADO
+      // SE FINALIZAR COM [ENTER] ATRIBUI O VALOR ? cNOME
+      // SE SAIR COM [ESC] cNOME PERMANECE = SPACE(35)
+   @ 02,10 SAY "FUNCTION VOC? DISSE QUE ERA "
+   @ 18,09 say "ICMS Retido na Fonte: " + str(_ITENSCOMP->IcPrICMS) 
+   alert(MSG_IMPRESSAO_COMPLETA)
+endif
+close _ITENSCOMP
+close _UNMEDIDA
+return NIL
+
+******************************************
 function IMP_VENDA(CODI,QUANTI,PREC,PAGO)
 ******************************************
 local OPERACAO , NFUNCIONARIO , I:=Total:=0
@@ -1062,19 +1080,20 @@ select _PRODUTOS
 set order to 1
 @ prow(),pcol() say chr(18)
 SET DEVICE TO SCREEN
+IMP_VENDA_FISCAL()
 //alert(MSG_IMPRESSAO_COMPLETA)
-OPEN ITENSCOMP ALIAS "_ITENSCOMP" INDEX CO9_ICOMP,CPR_ICOMP,CDT_ICOMP,ICOMPDOC,CO9_ICDTP SHARED
-select _ITENSCOMP
-set order to 2
-if dbseek(4)
-   CLS // LIMPA A TELA// L? O(S) GET(S) - ESPERA ENTRADA DO TECLADO
-      // SE FINALIZAR COM [ENTER] ATRIBUI O VALOR ? cNOME
-      // SE SAIR COM [ESC] cNOME PERMANECE = SPACE(35)
-   @ 02,10 SAY "VOC? DISSE QUE ERA "
-   @ 18,09 say "ICMS Retido na Fonte: " + str(_ITENSCOMP->IcPrICMS) 
-   alert(MSG_IMPRESSAO_COMPLETA)
-endif
-close _ITENSCOMP
+// OPEN ITENSCOMP ALIAS "_ITENSCOMP" INDEX CO9_ICOMP,CPR_ICOMP,CDT_ICOMP,ICOMPDOC,CO9_ICDTP SHARED
+// select _ITENSCOMP
+// set order to 2
+// if dbseek(4)
+//    CLS // LIMPA A TELA// L? O(S) GET(S) - ESPERA ENTRADA DO TECLADO
+//       // SE FINALIZAR COM [ENTER] ATRIBUI O VALOR ? cNOME
+//       // SE SAIR COM [ESC] cNOME PERMANECE = SPACE(35)
+//    @ 02,10 SAY "VOC? DISSE QUE ERA "
+//    @ 18,09 say "ICMS Retido na Fonte: " + str(_ITENSCOMP->IcPrICMS) 
+//    alert(MSG_IMPRESSAO_COMPLETA)
+// endif
+// close _ITENSCOMP
 close _UNMEDIDA
 return NIL
 
