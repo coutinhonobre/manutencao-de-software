@@ -991,27 +991,30 @@ endif
 return nil
 
 ******************************************
-function IMP_VENDA_FISCAL()
+function IMP_VENDA_FISCAL(cod_prod, PrNome, Nome_UnMed, QUANTI, PREC)
 ******************************************
 OPEN ITENSCOMP ALIAS "_ITENSCOMP" INDEX CO9_ICOMP,CPR_ICOMP,CDT_ICOMP,ICOMPDOC,CO9_ICDTP SHARED
 select _ITENSCOMP
 set order to 2
-if dbseek(4)
-   CLS // LIMPA A TELA// L? O(S) GET(S) - ESPERA ENTRADA DO TECLADO
+if dbseek(cod_prod)
+   //CLS // LIMPA A TELA// L? O(S) GET(S) - ESPERA ENTRADA DO TECLADO
       // SE FINALIZAR COM [ENTER] ATRIBUI O VALOR ? cNOME
       // SE SAIR COM [ESC] cNOME PERMANECE = SPACE(35)
-   @ 02,10 SAY "FUNCTION VOC? DISSE QUE ERA "
-   @ 18,09 say "ICMS Retido na Fonte: " + str(_ITENSCOMP->IcPrICMS) 
-   alert(MSG_IMPRESSAO_COMPLETA)
+   // @ 02,10 SAY "FUNCTION VOC? DISSE QUE ERA " + str(cod_prod)
+   // @ 18,09 say "ICMS Retido na Fonte: " + str(_ITENSCOMP->IcPrICMS) 
+   @ L,0  say alltrim(substr(PrNome,1,35))
+   @ L,36 say alltrim(substr(Nome_UnMed,1,18))
+   @ L,04 say padl(str(QUANTI,8,3),8) + " X " + padl(str(PREC,11,2),11)+" = "+padl(str(PREC*QUANTI,11,2),11)
+   @ L,56 say + str(_ITENSCOMP->IcPrICMS)
+   //alert(MSG_IMPRESSAO_COMPLETA)
 endif
 close _ITENSCOMP
-close _UNMEDIDA
 return NIL
 
 ******************************************
 function IMP_VENDA(CODI,QUANTI,PREC,PAGO)
 ******************************************
-local OPERACAO , NFUNCIONARIO , I:=Total:=0
+local OPERACAO , NFUNCIONARIO , I:=Total:=0, PrNome_v:=ARRAY(LEN(CODI)) , Nome_UnMed_v:=ARRAY(LEN(CODI)) , QUANTI_v := ARRAY(LEN(CODI)) , PREC_v := ARRAY(LEN(CODI))
 set device to print
 OPEN OPERACOE ALIAS "_OPERACOE" INDEX CO4_OPER,NO4_OPER SHARED
 set order to 1
@@ -1030,28 +1033,40 @@ OPEN UNMEDIDA  ALIAS "_UNMEDIDA" INDEX COD_UNMED,NOME_UNMED SHARED
 @ PROW(),36  say "Hora: "+FMovHr
 @ PROW()+1,0 say substr(OPERACAO,1,25)
 @ PROW(),36  say "DOC: "+alltrim(str(FMovCod))
-@ PROW()+1,0 SAY "Funcion�rio: " + substr(NFUNCIONARIO,1,35)
-@ PROW()+1,0 SAY REPLICATE("=",55)
+@ PROW()+1,0 SAY "Funcionario: " + substr(NFUNCIONARIO,1,35)
+@ PROW()+1,0 SAY REPLICATE("=",75)
 @ PROW()+1,0 say "Produto"
 @ PROW(),36  say "Unidade de Medida"
-@ PROW()+1,0 SAY REPLICATE("=",55)
+@ PROW(),56  say "ICMS"
+@ PROW()+1,0 SAY REPLICATE("=",75)
 L:=Prow()+1
 select _PRODUTOS
 set order to 1
 FOR I=1 TO LEN(CODI)
    dbseek(CODI[I])
-   @ L,0  say alltrim(substr(PrNome,1,35))
+   //@ L,0  say alltrim(substr(PrNome,1,35))
+   PrNome_v[I] = _PRODUTOS->PrNome
    select _UnMedida
    set order to 1
    dbseek(_PRODUTOS->PrUnidMed)
-   @ L,36 say + alltrim(substr(Nome_UnMed,1,18))
+   //@ L,36 say + alltrim(substr(Nome_UnMed,1,18))
+   Nome_UnMed_v[I] = _UNMEDIDA->Nome_UnMed
    select _PRODUTOS
    l++
-   @ L,04 say padl(str(QUANTI[I],8,3),8) + " X " + padl(str(PREC[I],11,2),11)+" = "+padl(str(PREC[I]*QUANTI[I],11,2),11)
+   QUANTI_v[I] = QUANTI[I]
+   PREC_v[I]  = PREC[I]
+   //@ L,04 say padl(str(QUANTI[I],8,3),8) + " X " + padl(str(PREC[I],11,2),11)+" = "+padl(str(PREC[I]*QUANTI[I],11,2),11)
    Total += (PREC[I]*QUANTI[I])
    L++
+   
+   //IMP_VENDA_FISCAL(CODI[I], PrNome, _UNMEDIDA->Nome_UnMed, QUANTI[I], PREC[I])
+   //https://www.linguagemclipper.com.br/aprendendo-arrays
+   
 next
-@ PROW()+1,00 SAY REPLICATE("=",55)
+FOR I=1 TO LEN(CODI)
+   IMP_VENDA_FISCAL(CODI[I], PrNome_v[I], Nome_UnMed_v[I], QUANTI_v[I], PREC_v[I])
+next   
+@ PROW()+1,00 SAY REPLICATE("=",75)
 @ PROW()+1,20 say "Total Bruto "+padl(str(Total_Pagar,13,2),13)
 @ PROW()+1,20 say "Desconto"+ padl(str(FDESCONTO,4),13)+"%"
 if Nome_Operacao=="ORCAMENTO" .or. Nome_Operacao=="OR�AMENTO"
@@ -1061,7 +1076,7 @@ else
    @ PROW()+1,20 say "Total pago  "+padl(str(Total_Pago,13,2),13)
    @ PROW()+1,20 say "     Troco  "+padl(str(Total_Pago-Liquido),13)
 endif
-@ PROW()+1,00 SAY "============= 12DOCUMENTO SEM VALOR FISCAL =============+"
+@ PROW()+1,00 SAY "============= DOCUMENTO SEM VALOR FISCAL =============+"
 @ PROW()+2,00 SAY ""
 If Mostra_Cliente
     OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
@@ -1080,8 +1095,7 @@ select _PRODUTOS
 set order to 1
 @ prow(),pcol() say chr(18)
 SET DEVICE TO SCREEN
-IMP_VENDA_FISCAL()
-//alert(MSG_IMPRESSAO_COMPLETA)
+alert(MSG_IMPRESSAO_COMPLETA)
 // OPEN ITENSCOMP ALIAS "_ITENSCOMP" INDEX CO9_ICOMP,CPR_ICOMP,CDT_ICOMP,ICOMPDOC,CO9_ICDTP SHARED
 // select _ITENSCOMP
 // set order to 2
