@@ -65,6 +65,7 @@ do while .t.
        Mostra_Cliente := .F.
        Nova_Lin := 07
     endif
+    Nova_Lin := 07
  endif
  close _OPERACOE
  OPEN FUNCIONA ALIAS "_FUNCIONA" INDEX CO3_FUNC, NO3_FUNC, CargoFunc SHARED
@@ -82,7 +83,7 @@ do while .t.
     return nil
  endif
  HelpVar("<ENTER> Visualizar Dados de Funcion rio <ESC> Retorna <F10> Calculadora",80,23,00)
- @ Nova_Lin,04 say "Funcion rio :" get FMovFunc PICT "99" ;
+ @ 6,04 say "Funcion rio :" get FMovFunc PICT "99" ;
    valid(pesquisa2(08,10,14,50,"_FUNCIONA",FMovFunc,"FunCod","FuncNome"," Funcion rios ") ;
    .and. !Empty(FMovFunc) .and. testa("_FUNCIONA",FMovFunc,,Nova_Lin,22,"FuncNome"))
  read
@@ -99,19 +100,19 @@ do while .t.
  endif
  close _FUNCIONA
  close _CARGOS
- If Mostra_Cliente
-    OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
-    if lastrec()=0
-       Alerta(11,15,"N„o H  Nenhum Cliente Cadastrado!!")
-       close Database
-       return nil
-    endif
-    @ Nova_Lin+1,04 say "Cod.Cliente :" get FCodCli PICT "999" ;
-      valid(pesquisa2(08,03,14,53,"_CLIENTES",FCodCli,"ClCod","ClNome"," Clientes ") ;
-   .and. !Empty(FCodCli) .and. testa("_Clientes",FCodCli,,07,22,"ClNome"))
-    read
-    close _CLIENTES
- Endif
+
+ OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
+ if lastrec()=0
+    Alerta(11,15,"N„o H  Nenhum Cliente Cadastrado!!")
+    close Database
+    return nil
+ endif
+ @ 7,04 say "Cod.Cliente :" get FCodCli PICT "999" ;
+   valid(pesquisa2(08,03,14,53,"_CLIENTES",FCodCli,"ClCod","ClNome"," Clientes ") ;
+.and. !Empty(FCodCli) .and. testa("_Clientes",FCodCli,,07,22,"ClNome"))
+ read
+ close _CLIENTES
+
  if lastkey()==K_ESC
     restscreen(0,0,maxrow(),maxcol(),TELA_VENDA)
     close _MOVIMENT
@@ -1045,19 +1046,19 @@ else
 endif
 @ PROW()+1,00 SAY "============= DOCUMENTO SEM VALOR FISCAL =============+"
 @ PROW()+2,00 SAY ""
-If Mostra_Cliente
-    OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
-    if lastrec()=0
-       Alerta(11,15,"N„o H  Nenhum Cliente Cadastrado!!")
-       close Database
-       return nil
-    else
-       dbseek(FCodCli)
-    endif
-    @ PROW()+1,00 SAY REPLICATE("_",40)
-    @ PROW()+1,00 say ClNome
-    close _CLIENTES
-Endif
+
+OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
+if lastrec()=0
+   Alerta(11,15,"N„o H  Nenhum Cliente Cadastrado!!")
+   close Database
+   return nil
+else
+   dbseek(FCodCli)
+endif
+@ PROW()+1,00 SAY REPLICATE("_",40)
+@ PROW()+1,00 say ClNome
+close _CLIENTES
+
 select _PRODUTOS
 set order to 1
 @ prow(),pcol() say chr(18)
