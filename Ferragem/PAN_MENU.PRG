@@ -99,14 +99,15 @@ return nil
 ********************
 function Cadastro()
 ********************
-LOCAL MENU11:={{" Produtos     ","Cadastro de Produtos"          ,{||Cad_Pro()}},;
-               {" Grupos       ","Cadastro de Grupos"            ,{||Cad_Grupo()}},;
-               {" Un. de Medida","Cadastro Unidade de Medida"    ,{||Cad_UnMed()}},;
-               {" Cargos       ","Cadastro de Cargos Funcinarios",{||Cad_Cargo()}},;
-               {" Funcionarios ","Cadastro de Funcionarios"      ,{||Cad_Func()}},;
-               {" Clientes     ","Cadastro de Clientes"          ,{||Cad_Cli()}},;
-               {" Fornecedores ","Cadastro de Fornecedores"      ,{||Cad_For()}},;
-               {" Operacoes    ","Cadastro de Operacoes"         ,{||Cad_Operacao()}}}
+LOCAL MENU11:={{" Produtos                      ","Cadastro de Produtos"          ,{||Cad_Pro()}},;
+               {" Grupos                        ","Cadastro de Grupos"            ,{||Cad_Grupo()}},;
+               {" Un. de Medida                 ","Cadastro Unidade de Medida"    ,{||Cad_UnMed()}},;
+               {" Cargos                        ","Cadastro de Cargos Funcinarios",{||Cad_Cargo()}},;
+               {" Funcionarios                  ","Cadastro de Funcionarios"      ,{||Cad_Func()}},;
+               {" Clientes - Pessoa Juridica    ","Cadastro de Clientes Pessoa Fisica"          ,{||Cad_Cli_Juridica()}},;
+               {" Clientes - Pessoa Fisica      ","Cadastro de Clientes Pessoa Juridica"          ,{||Cad_Cli_Fisica()}},;
+               {" Fornecedores                  ","Cadastro de Fornecedores"      ,{||Cad_For()}},;
+               {" Operacoes                     ","Cadastro de Operacoes"         ,{||Cad_Operacao()}}}
 LOCAL telacadastro:=0
 if TRotina(5)
    MENUBLOCK(7,12,MENU11,@TELACADASTRO,.T.,,.F.)
