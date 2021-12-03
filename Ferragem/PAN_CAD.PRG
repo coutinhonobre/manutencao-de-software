@@ -15,13 +15,13 @@ apaga(.T.)
 @ 23,00 say Space(80)
 OPEN UNMEDIDA  ALIAS "_UNMEDIDA" INDEX COD_UNMED,NOME_UNMED SHARED
 if lastrec()=0
-   Alerta(11,15,"N?o H? Nenhuma Unidade de Medida Cadastrada!!")
+   Alerta(11,15,"Nao Ha Nenhuma Unidade de Medida Cadastrada!!")
    close all
    return nil
 endif
 OPEN GRUPOS  ALIAS "_GRUPOS" INDEX CO2_GRUP,NO2_GRUP SHARED
 if lastrec()=0
-   Alerta(11,15,"N?o H? Nenhum Grupo Cadastrado!!")
+   Alerta(11,15,"Nao Ha Nenhum Grupo Cadastrado!!")
    close all
    return nil
 endif
@@ -30,7 +30,7 @@ SKDADO:={"_PRODUTOS","PrCod"}
 set order to 1
 dbgotop()
 moldura(06,20,20,68,.f.," Cadastro de Produtos ")
-@ 23,00 say "<ESC> Retorna <F2> Help do Produto <F9> Pr?x. C?digo <F10> Calculadora"
+@ 23,00 say "<ESC> Retorna <F2> Help do Produto <F9> Prox. Codigo <F10> Calculadora"
 do while lastkey() <> K_ESC
  EProduto:=.F.
  Conf = space(01)
@@ -41,7 +41,7 @@ do while lastkey() <> K_ESC
  set key K_F9 to Prox_Cod()
  set key K_F2 to Help_Produto()
  FPrCod := Prox_Cod()
- @ 07,21 say "C?digo :" Get FPrCod pict "9999" valid(FPrCod > 0)
+ @ 07,21 say "Codigo :" Get FPrCod pict "9999" valid(FPrCod > 0)
  Read
  set key K_F9 to
  set key K_F2 to
@@ -56,28 +56,28 @@ do while lastkey() <> K_ESC
  testa("_GRUPOS",FPrGrupo,,18,37,"GpNome")
  testa("_UnMedida",FPrUnidMed,,15,44,"Nome_UnMed")
  @ 09,22 say "Nome  :" Get FPrNome pict "@!" ;
-   valid(Ver_Cadastro(FPrNome,FPrCod,"Produto j? Cadastrado,<Pressione qualquer Tecla para continuar>");
+   valid(Ver_Cadastro(FPrNome,FPrCod,"Produto ja Cadastrado,<Pressione qualquer Tecla para continuar>");
    .and. !Empty(FPrNome)) when HelpVar("O Campo Nome deve Ser Diferente de Vazio..!",80,23,0)
- @ 10,21 say Repl("?",18) + " Pre?o " + Repl("?",18)
+ @ 10,21 say Repl("?",18) + " Preco " + Repl("?",18)
  @ 11,22 say "Custo :" Get FPrPCusto pict "@E 9,999,999.99" ;
              valid(FPrPCusto>=0);
-             when HelpVar("O Campo Custo Aceita Pre?o de Custo Maior ou Igual a Zero..!",80,23,0)
+             when HelpVar("O Campo Custo Aceita Preco de Custo Maior ou Igual a Zero..!",80,23,0)
  @ 11,43 say "Venda :" Get FPrPVenda pict "@E 9,999,999.99";
              valid(FPrPVenda>=0) ;
              when HelpVar("O Campo Venda Deve Ser Maior ou Igual ao Campo Custo..!",80,23,0)
  @ 12,21 say Repl("?",17) + " Estoque " + Repl("?",17)
  @ 13,22 say "Atual :"  Get FPrEAtual Pict "9999.999" ;
              when HelpVar("O Campo Atual Aceita Zero..!",80,23,0)
- @ 13,42 say "M?nimo :" Get FPrEMin   Pict "999"
+ @ 13,42 say "Minimo :" Get FPrEMin   Pict "999"
              //valid(FPrEAtual >= FPrEMin) ;
              //when HelpVar("O Campo M?nimo deve ser Menor que o Campo Atual..!",80,23,0)
- @ 14,21 say Repl("?",10) + " Informa?oes Adicionais " + Repl("?",8)
+ @ 14,21 say Repl("?",10) + " Informacoes Adicionais " + Repl("?",8)
  @ 15,22 say "Unidade Medida :" Get FPrUnidMed pict "999" ;
    valid(pesquisa(05,30,13,66,"_UnMedida",FPrUnidMed,"Cod_UnMed","Nome_UnMed"," Un. Medida ") ;
    .and. testa("_UnMedida",FPrUnidMed,,15,44,"Nome_UnMed")) ;
-   when HelpVar("Pressione ?Enter? Para Acessar Un.Medida",80,23,0)
+   when HelpVar("Pressione o Enter? Para Acessar Un.Medida",80,23,0)
  @ 16,22 say "Controla Estoque:" Get FPrEst Pict "@!" valid( FPrEst $ "SN") ;
-             when HelpVar("Digite <S> P/ Controlar Estoque e <N> P/ N?o Controlar Estoque",80,23,0)
+             when HelpVar("Digite <S> P/ Controlar Estoque e <N> P/ Nao Controlar Estoque",80,23,0)
  @ 17,21 say Repl("?",18) + " Grupo " + Repl("?",18)
  @ 18,22 say "Grupo :" Get FPrGrupo pict "999" ;
    valid(pesquisa(05,33,13,65,"_Grupos",FPrGrupo,"GpCod","GpNome"," Grupos ") ;
@@ -125,7 +125,7 @@ do while lastkey() <> K_ESC
     select &arq_atual
     dbgoto(Novo_Rec)
     if EProduto
-       Alerta(11,25,"N?o Posso Deletar Esse Registro")
+       Alerta(11,25,"Nao Posso Deletar Esse Registro")
     else
        do while .t.
           if n_reclock()
@@ -168,7 +168,7 @@ OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
 SKDADO:={"_CLIENTES","ClCod"}
 @ 23,00 say Space(80)
 moldura(04,02,22,75,.f.," Cadastro de Clientes - Pessoa Juridica ")
-@ 23,00 say "<ESC> Retorna <Enter> Help do Cliente <F9> Pr?x. C?digo <F10> Calculadora"
+@ 23,00 say "<ESC> Retorna <Enter> Help do Cliente <F9> Prox. Codigo <F10> Calculadora"
 do while lastkey() <> K_ESC
  Conf = space(01)
  Slinha := savescreen(23,00,23,maxcol())
@@ -178,7 +178,7 @@ do while lastkey() <> K_ESC
  dbgobottom()
  FClCod := 0
  set key K_F9 to Prox_Cod()
- @ 05,14 say "C?digo :" Get FClCod pict "999" ;
+ @ 05,14 say "Codigo :" Get FClCod pict "999" ;
   valid(pesquisa(06,18,15,67,"_Clientes",FClCod,"ClCod","ClNome"," Clientes "))
  Read
  set key K_F9 to
@@ -194,13 +194,13 @@ do while lastkey() <> K_ESC
     igual_var()
  endif
  @ 05,27 say "Nome :"      Get FClNome pict "@!" ;
-   valid(Ver_Cadastro(FClNome,FClCod,"Cliente j? Cadastrado,<Pressione qualquer Tecla para continuar>"))
+   valid(Ver_Cadastro(FClNome,FClCod,"Cliente ja Cadastrado,<Pressione qualquer Tecla para continuar>"))
  @ 07,12 say "Endereco :"  get FClEnd Pict "@!"
  @ 09,14 say "Bairro :"    get FClBairro Pict "@!"
  @ 09,45 say "Cidade :"    get FClCid Pict "@!"
  @ 11,17 say "Cep :"       get FClCep  Pict "@R 99999-999"
  @ 11,43 say "Telefone :"  get FClFone Pict "@R (99999) 9999-9999"
- @ 13,12 say "N? do RG :"  get FClRG   Pict "@!"
+ @ 13,12 say "Numero do RG :"  get FClRG   Pict "@!"
  @ 13,48 say "CPF :"       get FClCPF  Pict "999.999.999-99"
  @ 15,07 say "Dt Nascimento :"  get FCLDTNASC  Pict "99/99/99"
  @ 17,17 say "PAI :"    get FClMAE Pict "@!"
@@ -233,7 +233,7 @@ do while lastkey() <> K_ESC
      Set Order to 2
      dbgotop()
      if dbseek(FClCod)
-        Alerta(11,10,"N?o Posso Deletar Esse Registro, Existe Recebimento Pendente..!")
+        Alerta(11,10,"Nao Posso Deletar Esse Registro, Existe Recebimento Pendente..!")
      else
         select _CLIENTES
         do while .t.
@@ -268,7 +268,7 @@ Function Cad_Cli_Fisica()
    SKDADO:={"_CLIENTES","ClCod"}
    @ 23,00 say Space(80)
    moldura(04,02,22,75,.f.," Cadastro de Clientes - Pessoa Fisica ")
-   @ 23,00 say "<ESC> Retorna <Enter> Help do Cliente <F9> Pr?x. C?digo <F10> Calculadora"
+   @ 23,00 say "<ESC> Retorna <Enter> Help do Cliente <F9> Prox. Codigo <F10> Calculadora"
    do while lastkey() <> K_ESC
     Conf = space(01)
     Slinha := savescreen(23,00,23,maxcol())
@@ -278,7 +278,7 @@ Function Cad_Cli_Fisica()
     dbgobottom()
     FClCod := 0
     set key K_F9 to Prox_Cod()
-    @ 05,14 say "C?digo :" Get FClCod pict "999" ;
+    @ 05,14 say "Codigo :" Get FClCod pict "999" ;
      valid(pesquisa(06,18,15,67,"_Clientes",FClCod,"ClCod","ClNome"," Clientes "))
     Read
     set key K_F9 to
@@ -294,13 +294,13 @@ Function Cad_Cli_Fisica()
        igual_var()
     endif
     @ 05,27 say "Nome :"      Get FClNome pict "@!" ;
-      valid(Ver_Cadastro(FClNome,FClCod,"Cliente j? Cadastrado,<Pressione qualquer Tecla para continuar>"))
+      valid(Ver_Cadastro(FClNome,FClCod,"Cliente ja Cadastrado,<Pressione qualquer Tecla para continuar>"))
     @ 07,12 say "Endereco :"  get FClEnd Pict "@!"
     @ 09,14 say "Bairro :"    get FClBairro Pict "@!"
     @ 09,45 say "Cidade :"    get FClCid Pict "@!"
     @ 11,17 say "Cep :"       get FClCep  Pict "@R 99999-999"
     @ 11,43 say "Telefone :"  get FClFone Pict "@R (99999) 9999-9999"
-    @ 13,12 say "N? do RG :"  get FClRG   Pict "@!"
+    @ 13,12 say "Numero do RG :"  get FClRG   Pict "@!"
     @ 13,48 say "CPF :"       get FClCPF  Pict "999.999.999-99"
     @ 15,07 say "Dt Nascimento :"  get FCLDTNASC  Pict "99/99/99"
     @ 17,17 say "PAI :"    get FClMAE Pict "@!"
@@ -333,7 +333,7 @@ Function Cad_Cli_Fisica()
         Set Order to 2
         dbgotop()
         if dbseek(FClCod)
-           Alerta(11,10,"N?o Posso Deletar Esse Registro, Existe Recebimento Pendente..!")
+           Alerta(11,10,"Nao Posso Deletar Esse Registro, Existe Recebimento Pendente..!")
         else
            select _CLIENTES
            do while .t.
@@ -368,7 +368,7 @@ apaga(.T.)
 OPEN GRUPOS  ALIAS "_GRUPOS" INDEX CO2_GRUP,NO2_GRUP SHARED
 SKDADO:={"_GRUPOS","GpCod"}
 set order to 1
-HelpVar("<ESC> Retorna <Enter> Help do Grupo <F9> Pr?x. C?digo <F10> Calculadora",80,23,00)
+HelpVar("<ESC> Retorna <Enter> Help do Grupo <F9> Prox. Codigo <F10> Calculadora",80,23,00)
 moldura(10,20,17,64,.f.," Cadastro de Grupos ")
 do while lastkey() <> K_ESC
    EGrupo:=.F.
@@ -379,7 +379,7 @@ do while lastkey() <> K_ESC
    dbgobottom()
    FGpCod = 0
    set key K_F9 to Prox_Cod()
-   @ 12,22 say "             C?digo :" Get FGpCod pict "999" ;
+   @ 12,22 say "             Codigo :" Get FGpCod pict "999" ;
       valid(pesquisa(13,18,19,52,"_GRUPOS",FGpCod,"GpCod","GpNome"," Grupos "))
    Read
    set key K_F9 to
@@ -395,8 +395,8 @@ do while lastkey() <> K_ESC
       igual_var()
    endif
    @ 14,22 say "               Nome :" Get FGpNome pict "@!" ;
-     valid(Ver_Cadastro(FGpNome,FGpCod,"Grupo j? Cadastrado,<Pressione qualquer Tecla para continuar>"))
-   @ 16,22 say "Gera Comiss?o(S/N)? :" Get FGpCom pict "@!" ;
+     valid(Ver_Cadastro(FGpNome,FGpCod,"Grupo ja Cadastrado,<Pressione qualquer Tecla para continuar>"))
+   @ 16,22 say "Gera Comissao(S/N)? :" Get FGpCom pict "@!" ;
      valid(FGpCom$"SN")
    Read
    if lastkey()==K_ESC
@@ -431,7 +431,7 @@ do while lastkey() <> K_ESC
       select &arq_atual
       dbgoto(Novo_Rec)
       if EGrupo
-         Alerta(11,25,"N?o Posso Deletar Esse Registro")
+         Alerta(11,25,"Nao Posso Deletar Esse Registro")
        else
          do while .t.
             if n_reclock()
@@ -461,7 +461,7 @@ apaga(.T.)
 OPEN UNMEDIDA  ALIAS "_UNMEDIDA" INDEX COD_UNMED,NOME_UNMED SHARED
 SKDADO:={"_UNMEDIDA","COD_UNMED"}
 set order to 1
-HelpVar("<ESC> Retorna <Enter> Help de Un.Medida <F9> Pr?x. C?digo <F10> Calculadora",80,23,00)
+HelpVar("<ESC> Retorna <Enter> Help de Un.Medida <F9> Prox. Codigo <F10> Calculadora",80,23,00)
 moldura(10,20,17,64,.f.," Cadastro de Unidade de Medida ")
 do while lastkey() <> K_ESC
    EUnMed:=.F.
@@ -472,7 +472,7 @@ do while lastkey() <> K_ESC
    dbgobottom()
    FCod_UnMed = 0
    set key K_F9 to Prox_Cod()
-   @ 12,22 say "        C?digo :" Get FCod_UnMed pict "999" ;
+   @ 12,22 say "        Codigo :" Get FCod_UnMed pict "999" ;
       valid(pesquisa(13,18,19,52,"_UNMEDIDA",FCod_UnMed,"Cod_UnMed","Nome_UnMed"," Un. Medida "))
    Read
    set key K_F9 to
@@ -488,7 +488,7 @@ do while lastkey() <> K_ESC
       igual_var()
    endif
    @ 14,22 say "          Nome :" Get FNome_UnMed pict "@!" ;
-     valid(Ver_Cadastro(FNome_UnMed,Cod_UnMed,"Un.Medida j? Cadastrada,<Pressione qualquer Tecla para continuar>"))
+     valid(Ver_Cadastro(FNome_UnMed,Cod_UnMed,"Un.Medida ja Cadastrada,<Pressione qualquer Tecla para continuar>"))
    @ 16,22 say "Inteiro (S/N)? :" Get FInteiro pict "@!" ;
      valid(FInteiro$"SN")
    Read
@@ -528,7 +528,7 @@ do while lastkey() <> K_ESC
       select &arq_atual
       dbgoto(Novo_Rec)
       if EUnMed
-         Alerta(11,25,"N?o Posso Deletar Esse Registro")
+         Alerta(11,25,"Nao Posso Deletar Esse Registro")
        else
          do while .t.
             if n_reclock()
@@ -557,7 +557,7 @@ Tela_Func:=savescreen(0,0,maxrow(),maxcol())
 apaga(.T.)
 OPEN CARGOS ALIAS "_CARGOS" INDEX CargCod,CargNome SHARED
 if lastrec()=0
-   Alerta(11,15,"N?o H? Nenhum Cargo Cadastrado!!")
+   Alerta(11,15,"Nao Ha Nenhum Cargo Cadastrado!!")
    close all
    return nil
 endif
@@ -565,8 +565,8 @@ OPEN FUNCIONA ALIAS "_FUNCIONA" INDEX CO3_FUNC, NO3_FUNC, CargoFunc SHARED
 set order to 1
 SKDADO:={"_FUNCIONA","FunCod"}
 set key K_F6 to Carg_Help()
-moldura(04,10,20,65,.f.," Cadastro de Funcion?rios ")
-HelpVar("<ESC> Retorna <Enter> Help do Funcion?rio <F9> Pr?x. C?digo <F10> Calculadora",80,23,00)
+moldura(04,10,20,65,.f.," Cadastro de Funcionorios ")
+HelpVar("<ESC> Retorna <Enter> Help do Funcionorio <F9> Prox. Codigo <F10> Calculadora",80,23,00)
 do while lastkey() <> K_ESC
    Slinha := savescreen(23,00,23,maxcol())
    EFunc := .F.
@@ -577,8 +577,8 @@ do while lastkey() <> K_ESC
    FFunCod := 0
    FCivil := space(01)
    set key K_F9 to Prox_Cod()
-   @ 05,14 say "C?digo :" Get FFunCod pict "999" ;
-      valid(pesquisa(06,18,15,67,"_FUNCIONA",FFunCod,"FunCod","FuncNome"," Funcion?rios "))
+   @ 05,14 say "Codigo :" Get FFunCod pict "999" ;
+      valid(pesquisa(06,18,15,67,"_FUNCIONA",FFunCod,"FunCod","FuncNome"," Funcionarios "))
    Read
    set key K_F9 to
    if FFunCod == 0
@@ -594,16 +594,16 @@ do while lastkey() <> K_ESC
    endif
    testa("_CARGOS",FFuncCarg,,19,27,"CargNome")
    @ 07,16 say "Nome :"          get FFuncNome Pict "@!" ;
-     valid(Ver_Cadastro(FFuncNome,FFunCod,"Funcion?rio j? Cadastrado,<Pressione qualquer Tecla para continuar>"))
+     valid(Ver_Cadastro(FFuncNome,FFunCod,"Funcionario ja Cadastrado,<Pressione qualquer Tecla para continuar>"))
    @ 09,12 say "Endereco :"      get FFuncEnd Pict "@!"
    @ 11,14 say "Bairro :"        get FFcBairro Pict "@!"
    @ 11,44 say "Cep :"           get FFunCep Pict "@R 99999-999"
    @ 13,12 say "Telefone :"      get FFuncFone Pict "@R (99999) 9999-9999"
-   @ 13,41 say "Est.C?vil :"     get FFuncEc Pict "@!" when ;
-           HelpVar("'C'- Casado(a) 'S'- Solteiro(a) 'D'- Divorciado(a) 'V'- Vi?vo 'P'- seParado(a)",80,23,0);
+   @ 13,41 say "Est.Civil :"     get FFuncEc Pict "@!" when ;
+           HelpVar("'C'- Casado(a) 'S'- Solteiro(a) 'D'- Divorciado(a) 'V'- Viuvo 'P'- seParado(a)",80,23,0);
            valid(FFuncEc $ "CSDVP")
    @ 15,11 say repl("?",54)
-   @ 15,25 say " Informa??es Adicionais " color ["&cor_Titulo"]
+   @ 15,25 say " Informacoes Adicionais " color ["&cor_Titulo"]
    @ 17,12 say "Dt. Admi.:" get FFuncDt Pict "99/99/99"
    @ 17,32 say "N. Carteira Trabalho :" get FFuncNc
    @ 19,15 say "Cargo :" get FFuncCarg Pict "99" ;
@@ -622,10 +622,10 @@ do while lastkey() <> K_ESC
    endif
    select _FUNCIONA
    if Upper(Substr(Nome_Cargo,1,1)) <> "B"
-      @ 19,45 say "S?lario :" get FFuncSal pict "999.99"
+      @ 19,45 say "Salario :" get FFuncSal pict "999.99"
       Read
    else
-      @ 19,45 say "S?lario Comissionado"
+      @ 19,45 say "Salario Comissionado"
       FFuncSal := 0
    endif
    @ 23,00 say Space(80)
@@ -652,7 +652,7 @@ do while lastkey() <> K_ESC
       OPEN "&Nome_Arq" ALIAS "_MOVIMENT" INDEX "&IndM1","&IndM2" SHARED
       Mensagem := savescreen(0,0,maxrow(),maxcol())
       @ 23,00 say space(80)
-      @ 23,01 say "Mensagem : Aguarde, Pesquisando C?digo do Funcion?rio em vendas..!!" color ["W+*"]
+      @ 23,01 say "Mensagem : Aguarde, Pesquisando Codigo do Funcionorio em vendas..!!" color ["W+*"]
       select "_CARGOS"
       set order to 1
       dbseek(FFuncCarg)
@@ -672,11 +672,11 @@ do while lastkey() <> K_ESC
       select &arq_atual
       dbgoto(Novo_Rec)
       if EFunc
-         Alerta(11,25,"N?o Posso Deletar Esse Registro")
+         Alerta(11,25,"Nao Posso Deletar Esse Registro")
        else
          do while .t.
             if n_reclock()
-               if confirma("Excluir Funcion?rio ?") == 1
+               if confirma("Excluir Funcionario ?") == 1
                   delete
                   OPEN FCANT ALIAS "_FCANT" INDEX COD_FCANT SHARED
                   set order to 1
@@ -714,8 +714,8 @@ apaga(.T.)
 OPEN OPERACOE ALIAS "_OPERACOE" INDEX CO4_OPER,NO4_OPER SHARED
 SKDADO:={"_OPERACOE","OperCod"}
 set order to 1
-HelpVar("<ESC> Retorna <Enter> Help do Opera??o <F9> Pr?x. C?digo <F10> Calculadora",80,23,00)
-moldura(10,20,20,55,.f.," Cadastro de Opera??o ")
+HelpVar("<ESC> Retorna <Enter> Help do Operacao <F9> Prox. Codigo <F10> Calculadora",80,23,00)
+moldura(10,20,20,55,.f.," Cadastro de Operacao ")
 do while lastkey() <> K_ESC
    EOper := .F.
    Conf = space(01)
@@ -725,8 +725,8 @@ do while lastkey() <> K_ESC
    dbgobottom()
    FOperCod := 0
    set key K_F9 to Prox_Cod()
-   @ 12,22 say "C?digo :" Get FOperCod pict "99";
-      valid(pesquisa(13,18,19,47,"_OPERACOE",FOperCod,"OperCod","OperNome"," Opera??o "))
+   @ 12,22 say "Codigo :" Get FOperCod pict "99";
+      valid(pesquisa(13,18,19,47,"_OPERACOE",FOperCod,"OperCod","OperNome"," Operacao "))
    Read
    set key K_F9 to
    if FOperCod == 0
@@ -741,7 +741,7 @@ do while lastkey() <> K_ESC
       igual_var()
    endif
    @ 14,22 say "Nome   :" Get FOperNome pict "@!" ;
-     valid(Ver_Cadastro(FOperNome,FOperCod,"Opera?ao j? Cadastrada,<Pressione qualquer Tecla para continuar>"))
+     valid(Ver_Cadastro(FOperNome,FOperCod,"Operacao ja Cadastrada,<Pressione qualquer Tecla para continuar>"))
    @ 16,22 say "Mov.a Vista(S/N),(B)Bonific.:" Get FOperTipo pict "@!" ;
                valid (FOperTipo $ "SNB")
    @ 18,22 say "Gera Comissao (S/N):" Get FPaga_Com pict "@!" ;
@@ -786,11 +786,11 @@ do while lastkey() <> K_ESC
       select &arq_atual
       dbgoto(Novo_Rec)
       if EOper
-         Alerta(11,25,"N?o Posso Deletar Esse Registro")
+         Alerta(11,25,"Nao Posso Deletar Esse Registro")
        else
          do while .t.
             if n_reclock()
-               if confirma("Excluir Opera??o ?") == 1
+               if confirma("Excluir Operacao ?") == 1
                   delete
                endif
                exit
@@ -815,7 +815,7 @@ apaga(.T.)
 OPEN FORNECED ALIAS "_FORNECED" INDEX CO5_FOR,NO5_FOR SHARED
 set order to 1
 SKDADO:={"_FORNECED","ForCod"}
-HelpVar("<ESC> Retorna <Enter> Help do Fornecedor <F9> Pr?x. C?digo <F10> Calculadora",80,23,00)
+HelpVar("<ESC> Retorna <Enter> Help do Fornecedor <F9> Prox. Codigo <F10> Calculadora",80,23,00)
 moldura(03,10,21,75,.f.," Cadastro de Fornecedores ")
 do while lastkey() <> K_ESC
    EFor := .F.
@@ -826,7 +826,7 @@ do while lastkey() <> K_ESC
    dbgobottom()
    FForCod := 0
    set key K_F9 to Prox_Cod()
-   @ 04,14 say "C?digo :" Get FForCod pict "999" ;
+   @ 04,14 say "Codigo :" Get FForCod pict "999" ;
       valid(pesquisa(05,15,15,73,"_FORNECED",FForCod,"ForCod","ForNome"," Fornecedor "))
    Read
    set key K_F9 to
@@ -843,7 +843,7 @@ do while lastkey() <> K_ESC
    endif
    checaest(FForUf,12,26)
    @ 06,16 say "Nome :"          get FForNome Pict "@!" ;
-     valid(Ver_Cadastro(FForNome,FForCod,"Fornecedor j? Cadastrado,<Pressione qualquer Tecla para continuar>"))
+     valid(Ver_Cadastro(FForNome,FForCod,"Fornecedor ja Cadastrado,<Pressione qualquer Tecla para continuar>"))
    @ 08,12 say "Endereco :"      get FForEnd Pict "@!"
    @ 10,14 say "Bairro :"        get FFrBairro Pict "@!"
    @ 10,45 say "Cidade :"        get FForCid Pict "@!"
@@ -852,7 +852,7 @@ do while lastkey() <> K_ESC
    @ 12,48 say "Cep :"           get FForCep  Pict "@R 99999-999"
    @ 14,12 say "Telefone :"      get FForFone Pict "@R (99999) 9999-9999"
    @ 16,11 say repl("?",64)
-   @ 16,23 say " Informa?oes do Contato do Fornecedor " color ["&cor_Titulo"]
+   @ 16,23 say " Informacoes do Contato do Fornecedor " color ["&cor_Titulo"]
    @ 18,16 say "Nome :"     get FForCont  Pict "@!"
    @ 20,12 say "Telefone :" get FFrFnCont Pict "@R (99999) 9999-9999"
    Read
@@ -892,7 +892,7 @@ do while lastkey() <> K_ESC
       select &arq_atual
       dbgoto(Novo_Rec)
       if EFor
-         Alerta(11,25,"N?o Posso Deletar Esse Registro")
+         Alerta(11,25,"Nao Posso Deletar Esse Registro")
         else
          do while .t.
             if n_reclock()
@@ -921,7 +921,7 @@ apaga(.T.)
 OPEN CARGOS ALIAS "_CARGOS" INDEX CargCod,CargNome SHARED
 set order to 1
 SKDADO:={"_CARGOS","CargCod"}
-HelpVar("<ESC> Retorna <Enter> Help do Cargos <F9> Pr?x. C?digo <F10> Calculadora",80,23,00)
+HelpVar("<ESC> Retorna <Enter> Help do Cargos <F9> Prox. Codigo <F10> Calculadora",80,23,00)
 moldura(10,20,20,60,.f.," Cadastro de Cargos ")
 do while lastkey() <> K_ESC
    Conf = space(01)
@@ -931,7 +931,7 @@ do while lastkey() <> K_ESC
    dbgobottom()
    FCargCod = 0
    set key K_F9 to Prox_Cod()
-   @ 12,22 say "C?digo :" Get FCargCod pict "99" ;
+   @ 12,22 say "Codigo :" Get FCargCod pict "99" ;
       valid(pesquisa(13,18,19,50,"_CARGOS",FCargCod,"CargCod","CargNome"," Cargos "))
    Read
    set key K_F9 to
@@ -947,7 +947,7 @@ do while lastkey() <> K_ESC
       igual_var()
    endif
    @ 14,22 say "Nome   :" Get FCargNome pict "@!" ;
-     valid(Ver_Cadastro(FCargNome,FCargCod,"Cargo j? Cadastrado,<Pressione qualquer Tecla para continuar>"))
+     valid(Ver_Cadastro(FCargNome,FCargCod,"Cargo ja Cadastrado,<Pressione qualquer Tecla para continuar>"))
    @ 16,22 say "Salario ou Comissao (S/C):" Get FCargTipPg pict "@!" ;
                valid (FCargTipPg $ "SC")
    @ 18,22 say "Habilitar Venda no Caixa (S/N):" Get FHabilitaVC pict "@!" ;
@@ -982,7 +982,7 @@ do while lastkey() <> K_ESC
       if DBSeek(Codigo)
          select &arq_atual
          dbgoto(Novo_Rec)
-         Alerta(11,25,"N?o Posso Deletar Esse Registro")
+         Alerta(11,25,"Nao Posso Deletar Esse Registro")
        else
          select &arq_atual
          dbgoto(Novo_Rec)
@@ -1018,18 +1018,18 @@ Do while .T.
    Tipo_Rel = Par_PC_PV
    Slinha := savescreen(23,00,23,maxcol())
    Tipo_Relatorio = 0
-   @ 06,22 say "** Relat?rio de Valoriza??o do Estoque **" color ["&cor_Apresentacao"]
-   @ 07,22 say "Digite 1 - Para Pre?o de Custo Final"
-   @ 08,22 say "Digite 2 - Para Pre?o de Venda "
-   @ 09,22 say "Digite 3 - Para Pre?o de Custo N.F."
-   @ 10,22 Say "Pre?o de Custo/Venda:" Get Tipo_Relatorio pict "9" Valid ;
+   @ 06,22 say "** Relatario de Valorizacao do Estoque **" color ["&cor_Apresentacao"]
+   @ 07,22 say "Digite 1 - Para Preco de Custo Final"
+   @ 08,22 say "Digite 2 - Para Preco de Venda "
+   @ 09,22 say "Digite 3 - Para Preco de Custo N.F."
+   @ 10,22 Say "Preco de Custo/Venda:" Get Tipo_Relatorio pict "9" Valid ;
      (Tipo_Relatorio >0 .and. Tipo_Relatorio <=3)
    Read
    if lastkey()==K_ESC
       Restscreen(00,00,maxrow(),maxcol(),Tela_Senha)
       exit
    else
-      if confirma("Confirma grava?ao ?") == 1
+      if confirma("Confirma gravacao ?") == 1
          if Tipo_Relatorio == 1
             replace Par_PC_PV with "PC"
          elseif Tipo_Relatorio == 2
@@ -1057,15 +1057,15 @@ dbgotop()
 Do while .T.
    Tipo_Rel = Com_Func
    Slinha := savescreen(23,00,23,maxcol())
-   @ 06,22 say "** Paramentro de Comiss?o de Funcion?rio **" color ["&cor_Apresentacao"]
-   @ 07,22 Say "Comiss?o de Funcion?rio :" Get Tipo_Rel pict "99.99" Valid ;
+   @ 06,22 say "** Paramentro de Comissao de Funcionario **" color ["&cor_Apresentacao"]
+   @ 07,22 Say "Comissao de Funcionario :" Get Tipo_Rel pict "99.99" Valid ;
      (Tipo_Rel >0)
    Read
    if lastkey()==K_ESC
       Restscreen(00,00,maxrow(),maxcol(),Tela_Senha)
       exit
    else
-      if confirma("Confirma grava?ao ?") == 1
+      if confirma("Confirma gravacao ?") == 1
          replace Com_Func with Tipo_Rel
       endif
    endif
@@ -1095,7 +1095,7 @@ Do while .T.
       Restscreen(00,00,maxrow(),maxcol(),Tela_Senha)
       exit
    else
-      if confirma("Confirma grava?ao ?") == 1
+      if confirma("Confirma gravacao ?") == 1
          replace Custo_Fixo with Tipo_Rel
       endif
    endif
@@ -1120,23 +1120,23 @@ Do while .T.
    Slinha := savescreen(23,00,23,maxcol())
    T1 := T2 := T3 := T4 := T5 := T6 := space(01)
    T7 := T8 := T9 := T10:= T11:= T12:= space(01)
-   @ 04,22 Say "Usu?rio:" Get FUser pict "@!" Valid (!empty(FUser))
+   @ 04,22 Say "Usuario:" Get FUser pict "@!" Valid (!empty(FUser))
    @ 05,22 Say "Senha..: "
    @ 06,21 say repl("?",36)
-   @ 07,22 say "Permiss?o de Acesso Digite S ou N"
+   @ 07,22 say "Permissao de Acesso Digite S ou N"
    @ 08,21 say repl("?",36)
    @ 09,22 say chr(4) +"       Venda" color["&cor_Titulo"]
-   @ 10,24 say "   Lan?amento:"
+   @ 10,24 say "   Lancamento:"
    @ 11,24 say " Cancelamento:"
    @ 12,24 say "Monitoramento:"
    @ 13,22 say chr(4) +"    Cadastro"  color["&cor_Titulo"]
    @ 14,22 say chr(4) +"      Compra"    color["&cor_Titulo"]
-   @ 15,24 say "   Lan?amento:"
+   @ 15,24 say "   Lancamento:"
    @ 16,24 say " Cancelamento:"
-   @ 17,22 say chr(4) +"  Relat?rios" color["&cor_Titulo"]
+   @ 17,22 say chr(4) +"  Relatarios" color["&cor_Titulo"]
    @ 18,22 say chr(4) +"   Pagamento"  color["&cor_Titulo"]
    @ 19,22 say chr(4) +" Recebimento"  color["&cor_Titulo"]
-   @ 20,22 say chr(4) +"  Utilit?rio" color["&cor_Titulo"]
+   @ 20,22 say chr(4) +"  Utilitario" color["&cor_Titulo"]
    Read
    if lastkey()=K_ESC
       exit
@@ -1184,7 +1184,7 @@ Do while .T.
       Restscreen(00,00,maxrow(),maxcol(),Tela_Senha)
       exit
    else
-      if confirma("Confirma grava?ao ?") == 1
+      if confirma("Confirma gravacao ?") == 1
          if ! achou_User
             Dbappend()
          endif
