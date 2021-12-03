@@ -166,9 +166,9 @@ local Conf, STela_Cli := savescreen(0,0,maxrow(),maxcol())
 apaga(.T.)
 OPEN CLIENTES ALIAS "_CLIENTES" INDEX ClCod,ClNome SHARED
 SKDADO:={"_CLIENTES","ClCod"}
-@ 23,00 say Space(80)
+@ 27,00 say Space(80)
 moldura(04,02,22,75,.f.," Cadastro de Clientes - Pessoa Juridica ")
-@ 23,00 say "<ESC> Retorna <Enter> Help do Cliente <F9> Prox. Codigo <F10> Calculadora"
+@ 27,00 say "<ESC> Retorna <Enter> Help do Cliente <F9> Prox. Codigo <F10> Calculadora"
 do while lastkey() <> K_ESC
  Conf = space(01)
  Slinha := savescreen(23,00,23,maxcol())
@@ -193,19 +193,20 @@ do while lastkey() <> K_ESC
  if achou_Cliente
     igual_var()
  endif
- @ 05,27 say "Nome :"      Get FClNome pict "@!" ;
-   valid(Ver_Cadastro(FClNome,FClCod,"Cliente ja Cadastrado,<Pressione qualquer Tecla para continuar>"))
- @ 07,12 say "Endereco :"  get FClEnd Pict "@!"
- @ 09,14 say "Bairro :"    get FClBairro Pict "@!"
- @ 09,45 say "Cidade :"    get FClCid Pict "@!"
- @ 11,17 say "Cep :"       get FClCep  Pict "@R 99999-999"
- @ 11,43 say "Telefone :"  get FClFone Pict "@R (99999) 9999-9999"
- @ 13,12 say "Numero do RG :"  get FClRG   Pict "@!"
- @ 13,48 say "CPF :"       get FClCPF  Pict "999.999.999-99"
- @ 15,07 say "Dt Nascimento :"  get FCLDTNASC  Pict "99/99/99"
- @ 17,17 say "PAI :"    get FClMAE Pict "@!"
- @ 19,17 say "MAE :"    get FClPAI Pict "@!"
- @ 21,03 say "Local de Trabalho :"  get FClTRAB Pict "@!"
+ @ 05,27 say "Razao Social :"      Get FRAZAOSOCIAL pict "@!" ;
+   valid(Ver_Cadastro(FRAZAOSOCIAL,FClCod,"Cliente ja Cadastrado,<Pressione qualquer Tecla para continuar>"))
+ @ 07,37 say "Nome Fantasia :"     Get FNOMEFANTASIA pict "@!"
+ @ 09,12 say "Endereco :"  get FClEnd Pict "@!"
+ @ 11,14 say "Bairro :"    get FClBairro Pict "@!"
+ @ 11,45 say "Cidade :"    get FClCid Pict "@!"
+ @ 13,17 say "Cep :"       get FClCep  Pict "@R 99999-999"
+ @ 13,43 say "Telefone :"  get FNUMEROTELEFONE Pict "@R (99999) 9999-9999"
+ @ 15,12 say "Situaçao Cadastral :"  get FSITUACAOCADASTRAL   Pict "@!"
+ @ 15,48 say "CNPJ :"       get FCLCNPJ  Pict "99.999.999/9999-99"
+ @ 17,07 say "Data abertura :"  get FDATAABERTURA  Pict "99/99/99"
+ @ 19,17 say "CNAE :"    get FCNAE Pict "@!"
+ @ 21,17 say "Cod Juridico :"    get FCODIGONATUREZAJURIDICA Pict "@!"
+ @ 23,03 say "Email responsavel :"  get FEMAILRESPONSAVEL Pict "@!"
  Read
  FTIPOPESSOA := "JURIDICA"
  if lastkey()==K_ESC
@@ -213,8 +214,8 @@ do while lastkey() <> K_ESC
     set order to 2
     exit
  endif
- @ 23,00 say Space(80)
- @ 23,00 say "Mensagem: Grava (S/N) Exclui (E)?" get CONF pict "@!" valid CONF $"SNE"
+ @ 25,00 say Space(80)
+ @ 25,00 say "Mensagem: Grava (S/N) Exclui (E)?" get CONF pict "@!" valid CONF $"SNE"
  read
  if lastkey()==K_ESC
     restscreen(0,0,maxrow(),maxcol(),STela_Cli)
